@@ -1,12 +1,12 @@
 all: main
 
-main: main.o Image.o Timer.o
-	g++ main.o Timer.o Image.o -lSDL -lSDL_image -o main
+main: main.o background.o Timer.o
+	g++ main.o Image.o background.o -lSDL -lSDL_image -o main
 
 main.o: main.cpp
 	g++ -c main.cpp
 
-Image.o: Image.cpp
+Background.o: Background.cpp
 	g++ -c Image.cpp
 
 Timer.o: Timer.cpp
