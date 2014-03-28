@@ -8,20 +8,20 @@
 
 class player : public Sprite {
  public:
-  player(std::string,int,int,int); //constructor
-  virtual void move(); //moves otter up and down on screen
-  virtual void show(SDL_Surface *); //shows correct sprite for each frame based upon otter state
+  player(std::string,int,int,int);
+  virtual void move();
+  virtual void show(SDL_Surface *);
   virtual void set_clips(); //sets sprite sheet position clips
   virtual int getOffSetX(); //returns x position coordinate
   virtual int getOffSetY(); //returns y position coordinate 
   virtual int collision(); //handles collision
-  void handle_events(SDL_Event &); //checks for input event such as spacebar press
+  void handle_events(SDL_Event &);
   bool check_collision(Sprite *); //checks for collision between otter and an obstacle
-  void setIsVisible(bool); //set whether otter is visible on screen
-  int getStatus(); //returns state of otter
-  void setOffSetY(int); //sets y position coordinate of otter
-  void setStarting(bool); //sets variable tracking whether game is just starting
-  void setDead(bool); //sets variable tracking whether otter is dead
+  void setIsVisible(bool); 
+  int getStatus();
+  void setOffSetY(int); 
+  void setStarting(bool); 
+  void setDead(bool); 
 
 protected:
   bool isVisible; //otter shown on screen
