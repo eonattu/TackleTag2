@@ -19,7 +19,7 @@ void Sprite::apply_surface(SDL_Surface* source, SDL_Surface* destination, SDL_Re
     shift.y = offSetY;
 
     //Blit
-    SDL_BlitSurface(source, NULL, destination, &shift);
+    SDL_BlitSurface(source, clip, destination, &shift);
 
 }
 

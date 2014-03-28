@@ -181,6 +181,7 @@ void player::handle_events(SDL_Event &event)
 	case SDLK_RIGHT:velocityX  += velocity; break;
         }
     }
+  
   //If a key was released
     else if( event.type == SDL_KEYUP )
       {

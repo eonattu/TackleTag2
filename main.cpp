@@ -55,7 +55,7 @@ int main(int argc, char* args[]){
 	
 	//Update the screen
         SDL_Flip(screen);
-	SDL_Flip(playerND.sprite);	
+	//SDL_Flip(playerND.sprite);	
 
 	
 	//Cap the frame rate
