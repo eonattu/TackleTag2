@@ -3,13 +3,14 @@
 
 #include "sprite.h"
 #include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
 #include <string>
 
 Sprite::Sprite(int count):states(count,vector<SDL_Rect>(15)), SCREEN_WIDTH(960),SCREEN_HEIGHT(576), SCREEN_BPP(32), FRAMES_PER_SECOND(10), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){} //constructor
 
 bool Sprite::getHasCollided(){return hasCollided;} //returns variable tracking whether object has collided
 
-void Sprite::apply_surface(SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL){ //applies new surface
+void Sprite::apply_surface(SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip){ //applies new surface
     //Holds offsets
     SDL_Rect shift;
 
@@ -18,10 +19,37 @@ void Sprite::apply_surface(SDL_Surface* source, SDL_Surface* destination, SDL_Re
     shift.y = offSetY;
 
     //Blit
-    SDL_BlitSurface(source, clip, destination, &shift);
+    SDL_BlitSurface(source, NULL, destination, &shift);
+
 }
 
-SDL_Surface * Sprite::load_image(std::string filename, int r, int g, int b){ //takes in image of sprite
+SDL_Surface * Sprite::load_image(std::string filename, int r, int g, int b)
+{
+  SDL_Surface* loadedImage = NULL;
+  SDL_Surface* optimizedImage = NULL;
+  
+  //Load
+  loadedImage = SDL_LoadBMP( filename.c_str() );
+  
+    if( loadedImage != NULL )
+      {
+	//Optimize for better performance
+        //optimizedImage = SDL_DisplayFormat( loadedImage );
+	
+	//SDL_FreeSurface( loadedImage );
+	
+	//if( optimizedImage != NULL )
+	  //{
+	// SDL_SetColorKey( loadedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, r, g, b ) );
+	    // }
+	
+	
+      }
+    //return optimizedImage;
+    return loadedImage;
+}
+
+  /*
     //The image that's loaded
     SDL_Surface* loadedImage = NULL;
 
@@ -30,7 +58,7 @@ SDL_Surface * Sprite::load_image(std::string filename, int r, int g, int b){ //t
 
     //Load the image
     loadedImage = SDL_LoadBMP(filename.c_str());
-
+    
     //If the image loaded
    if(loadedImage != NULL){
         //Create an optimized surface
@@ -38,15 +66,18 @@ SDL_Surface * Sprite::load_image(std::string filename, int r, int g, int b){ //t
 
         //Free the old surface
         SDL_FreeSurface(loadedImage);
-
+	
         //If the surface was optimized
-	if(optimizedImage != NULL){
+	if(optimizedImage != NULL)
+	  {
             //Color key surface
-	  int colorkey = SDL_MapRGB(optimizedImage->format, r, g, b);
-	  SDL_SetColorKey(optimizedImage, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
-	}
+	    int colorkey = SDL_MapRGB(optimizedImage->format, r, g, b);
+	    SDL_SetColorKey(optimizedImage, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
+	  }
+	
    }
-
+*/
     //Return the optimized surface
-    return optimizedImage;
-}
+  // return optimizedImage;
+    
+

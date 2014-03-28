@@ -6,6 +6,8 @@
 #include "player.h"
 #include "sprite.h"
 
+#include<iostream>
+
 int main(int argc, char* args[]){
 
   player playerND("player.bmp", 255, 255, 255);
@@ -38,24 +40,28 @@ int main(int argc, char* args[]){
 	    playerND.handle_events(event);
 	    
 	    //If the user has Xed out the window
-	    if(event.type == SDL_QUIT){
-	      //Quit the program
-	      quit = true;
-	    }
+	    if(event.type == SDL_QUIT)
+	      {
+		//Quit the program
+		quit = true;
+	      }
 	  }
-       
+	
 	playerND.move();
+	background.show(screen);
+	playerND.show(screen);
+	
 	//Update the screen
         SDL_Flip(screen);
 	SDL_Flip(playerND.sprite);	
 
 	
 	//Cap the frame rate
-        if(fps.get_ticks() < 1000 / FRAMES_PER_SECOND){
-	  SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
-	}
-	
-
+        if(fps.get_ticks() < 1000 / FRAMES_PER_SECOND)
+	  {
+	    SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
+	  }
+		
       }
     //Clean up
     SDL_Quit();

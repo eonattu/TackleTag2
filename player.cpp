@@ -10,8 +10,8 @@ player::player(std::string filename, int r, int g, int b):Sprite(4), SPRITE_DOWN
     width = 175;
 
     //Initialize movement variables
-    offSetY = -35;
-    offSetX = 50;
+    offSetY = 10;
+    offSetX = 10;
     velocityX = 0;
     velocityY = 0;
 	
@@ -19,7 +19,7 @@ player::player(std::string filename, int r, int g, int b):Sprite(4), SPRITE_DOWN
 
     //Initialize animation variables
     frame = 0;
-    status = SPRITE_DOWN;
+    status = SPRITE_LEFT;
 
     //Sprite pointer
     sprite = load_image(filename,r,g,b);
@@ -40,7 +40,7 @@ void player::setDead(bool dead)
 void player::set_clips(){ //sets sprite sheet clip positions
     
   //Clip the sprites
- 
+  /*
   //down
   
     states[0][0].x = 0; 
@@ -63,7 +63,7 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[0][3].w = width;
     states[0][3].h = height;
     
-
+    
     // up
     
     // SPRITE TO BE FINISHED SOON
@@ -99,7 +99,7 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[2][5].y = 175;
     states[2][5].w = width;
     states[2][5].h = height;
-
+*/
     //left
     states[3][0].x = 0; 
     states[3][0].y = 0;
@@ -129,7 +129,8 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[3][5].x = 875; 
     states[3][5].y = 0;
     states[3][5].w = width;
-    states[3][5].h = height;	
+    states[3][5].h = height;
+    
 }
 
 
@@ -334,64 +335,66 @@ void player::move()
 }
 
 
-void player::show(SDL_Surface *screen){ //shows correct sprite of otter for each frame based upon state
+void player::show(SDL_Surface *screen)
+{ //shows correct sprite of otter for each frame based upon state
   if(isVisible)
     {
       if(velocityY > 0)
 	{
 	  status = SPRITE_DOWN; // set animation status to down
-	}
+	
       
       //Move to the next frame in the animation
       frame++;
-    }
+	}
       
-  //If Sprite is moving up
-  else if(velocityY < 0 ){
-    status = SPRITE_UP;
-    frame++; //Move to the next frame in the animation
-  }
+      //If Sprite is moving up
+      else if(velocityY < 0 )
+	{
+	  status = SPRITE_UP;
+	  frame++; //Move to the next frame in the animation
+	}
+      
+      else if(velocityX > 0)
+	{
+	  status = SPRITE_RIGHT;
+	  frame++;
+	}
+      
+      else if(velocityX < 0)
+	{
+	  status = SPRITE_LEFT;
+	  frame++;
+	}
+      
+      
+      
+      if( status == SPRITE_DOWN )
+	{
 
-  else if(velocityX > 0)
-    {
-      status = SPRITE_RIGHT;
-      frame++;
+	  apply_surface(sprite, screen, &states[0][frame] ); 
+	}
+      
+      else if( status == SPRITE_UP )
+	{ 
+	  apply_surface(sprite, screen, &states[1][frame] ); 
+	}
+      
+      else if( status == SPRITE_RIGHT )
+	{
+	  apply_surface(sprite, screen, &states[2][frame] );
+	}
+      
+      else if( status == SPRITE_LEFT)
+	{ 
+	  apply_surface(sprite, screen, &states[3][frame] );
+	}
+      
+      if(frame<6)
+	{ 
+	  frame=0;
+	}
     }
-  
-  else if(velocityX < 0)
-    {
-      status = SPRITE_LEFT;
-      frame++;
-    }
-
-  
-
-  if( status == SPRITE_UP )
-    {
-      apply_surface(sprite, screen, &states[0][frame] ); 
-    }
-  
-  else if( status == SPRITE_DOWN )
-    { 
-      apply_surface(sprite, screen, &states[1][frame] ); 
-    }
-  
-  else if( status == SPRITE_RIGHT )
-    {
-      apply_surface(sprite, screen, &states[2][frame] );
-    }
-  
-  else if( status == SPRITE_LEFT)
-    { 
-      apply_surface(sprite, screen, &states[3][frame] );
-    }
-
-  if(frame<6)
-    { 
-      frame=0;
-    }
-
-
 } 
 
 
