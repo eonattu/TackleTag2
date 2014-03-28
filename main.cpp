@@ -10,7 +10,6 @@
 
 int main(int argc, char* args[]){
 
-  player playerND("player.bmp", 255, 255, 255);
   
     //Quit flag
     bool quit = false;
@@ -19,6 +18,9 @@ int main(int argc, char* args[]){
     if(init() == false){
         return 1;
     }
+
+
+    player playerND("player.bmp", 255, 255, 255);
 
     //The frame rate regulator
     Timer fps;

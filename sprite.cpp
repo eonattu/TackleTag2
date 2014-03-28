@@ -34,19 +34,19 @@ SDL_Surface * Sprite::load_image(std::string filename, int r, int g, int b)
     if( loadedImage != NULL )
       {
 	//Optimize for better performance
-        //optimizedImage = SDL_DisplayFormat( loadedImage );
+        optimizedImage = SDL_DisplayFormat( loadedImage );
 	
-	//SDL_FreeSurface( loadedImage );
+	SDL_FreeSurface( loadedImage );
 	
-	//if( optimizedImage != NULL )
-	  //{
-	// SDL_SetColorKey( loadedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, r, g, b ) );
-	    // }
+	if( optimizedImage != NULL )
+	  {
+	    SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, r, g, b ) );
+	  }
 	
 	
       }
-    //return optimizedImage;
-    return loadedImage;
+    return optimizedImage;
+    //return loadedImage;
 }
 
  
