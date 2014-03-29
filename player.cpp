@@ -248,7 +248,11 @@ void player::show(SDL_Surface *screen)
 	  frame++;
 	}
       
-      
+
+      if(frame>5)
+	{ 
+	  frame=0;
+	}
       
       if( status == SPRITE_DOWN )
 	{
@@ -271,10 +275,7 @@ void player::show(SDL_Surface *screen)
 	  apply_surface(sprite, screen, &states[3][frame] );
 	}
       
-      if(frame<6)
-	{ 
-	  frame=0;
-	}
+
     }
 } 
 
