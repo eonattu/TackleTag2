@@ -38,6 +38,9 @@ void player::setDead(bool dead)
 }
 
 void player::set_clips(){ //sets sprite sheet clip positions
+
+
+
     
   //Clip the sprites
   
@@ -130,7 +133,7 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[3][5].y = 0;
     states[3][5].w = width;
     states[3][5].h = height;
-    
+  
 }
 
 
@@ -249,7 +252,7 @@ void player::show(SDL_Surface *screen)
 	}
       
 
-      if(frame>5)
+      if(frame>6)
 	{ 
 	  frame=0;
 	}
