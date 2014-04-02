@@ -10,8 +10,8 @@ player::player(std::string filename, int r, int g, int b):Sprite(4), SPRITE_DOWN
     width = 175;
 
     //Initialize movement variables
-    offSetY = 10;
-    offSetX = 10;
+    offSetY = 0;
+    offSetX = 0;
     velocityX = 0;
     velocityY = 0;
 	
@@ -204,7 +204,7 @@ void player::move()
   offSetX += velocityX;
   
   // Check boundary conditions
-  if( ( offSetX < 0 ) || ( offSetX > SCREEN_WIDTH ) )
+  if( (offSetX < 0) || ( offSetX + width > SCREEN_WIDTH ) )
     {
       offSetX -= velocityX;
     }  
