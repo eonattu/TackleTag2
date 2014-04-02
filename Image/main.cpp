@@ -9,7 +9,7 @@ const int FRAMES_PER_SECOND = 20;
 #include "SDL/SDL_image.h"
 #include "Image.h"
 #include "Timer.h"
-#include"Info.h"
+#include "Info.h"
 
 // Global Function
 bool init()
@@ -31,7 +31,6 @@ bool init()
   
   return true;
 }
-
 
 
 

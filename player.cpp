@@ -252,7 +252,7 @@ void player::show(SDL_Surface *screen)
 	}
       
 
-      if(frame>6)
+      if(frame>5)
 	{ 
 	  frame=0;
 	}
