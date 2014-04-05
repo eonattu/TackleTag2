@@ -6,8 +6,8 @@
 
 player::player(std::string filename, int r, int g, int b):Sprite(4), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){ //constructor
     //Initialize sprite dimensions
-    height = 175;
-    width = 175;
+    height = 120;
+    width = 120;
 
     //Initialize movement variables
     offSetY = 0;
@@ -45,92 +45,130 @@ void player::set_clips(){ //sets sprite sheet clip positions
   //Clip the sprites
   
   //down
+  states[0][0].x = 0; 
+  states[0][0].y = 0;
+  states[0][0].w = width;
+  states[0][0].h = height;
   
-    states[0][0].x = 0; 
-    states[0][0].y = 350;
-    states[0][0].w = width;
-    states[0][0].h = height;
-
-    states[0][1].x = 175;
-    states[0][1].y = 350;
-    states[0][1].w = width;
-    states[0][1].h = height;
-
-    states[0][2].x = 350; 
-    states[0][2].y = 350;
-    states[0][2].w = width;
-    states[0][2].h = height;
-
-    states[0][3].x = 525;
-    states[0][3].y = 350;
-    states[0][3].w = width;
-    states[0][3].h = height;
+  states[0][1].x = 120;
+  states[0][1].y = 0;
+  states[0][1].w = width;
+  states[0][1].h = height;
+  
+  states[0][2].x = 240; 
+  states[0][2].y = 0;
+  states[0][2].w = width;
+  states[0][2].h = height;
+  
+  states[0][3].x = 360;
+  states[0][3].y = 0;
+  states[0][3].w = width;
+  states[0][3].h = height;
+  
+  states[0][4].x = 480; 
+  states[0][4].y = 0;
+  states[0][4].w = width;
+  states[0][4].h = height;
+  
+  states[0][5].x = 600; 
+  states[0][5].y = 0;
+  states[0][5].w = width;
+  states[0][5].h = height;
     
     
     // up
     
-    // SPRITE TO BE FINISHED SOON
+    states[1][0].x = 0; 
+    states[1][0].y = 120;
+    states[1][0].w = width;
+    states[1][0].h = height;
+
+    states[1][1].x = 120;
+    states[1][1].y = 120;
+    states[1][1].w = width;
+    states[1][1].h = height;
+
+    states[1][2].x = 240; 
+    states[1][2].y = 120;
+    states[1][2].w = width;
+    states[1][2].h = height;
+
+    states[1][3].x = 360;
+    states[1][3].y = 120;
+    states[1][3].w = width;
+    states[1][3].h = height;
+
+    states[1][4].x = 480; 
+    states[1][4].y = 120;
+    states[1][4].w = width;
+    states[1][4].h = height;
+
+    states[1][5].x = 600; 
+    states[1][5].y = 120;
+    states[1][5].w = width;
+    states[1][5].h = height;
     
     // right
 
     states[2][0].x = 0; 
-    states[2][0].y = 175;
+    states[2][0].y = 240;
     states[2][0].w = width;
     states[2][0].h = height;
 
-    states[2][1].x = 175;
-    states[2][1].y = 175;
+    states[2][1].x = 120;
+    states[2][1].y = 240;
     states[2][1].w = width;
     states[2][1].h = height;
 
-    states[2][2].x = 350; 
-    states[2][2].y = 175;
+    states[2][2].x = 240; 
+    states[2][2].y = 240;
     states[2][2].w = width;
     states[2][2].h = height;
 
-    states[2][3].x = 525;
-    states[2][3].y = 175;
+    states[2][3].x = 360;
+    states[2][3].y = 240;
     states[2][3].w = width;
     states[2][3].h = height;
 
-    states[2][4].x = 700; 
-    states[2][4].y = 175;
+    states[2][4].x = 480; 
+    states[2][4].y = 240;
     states[2][4].w = width;
     states[2][4].h = height;
 
-    states[2][5].x = 875; 
-    states[2][5].y = 175;
+    states[2][5].x = 600; 
+    states[2][5].y = 240;
     states[2][5].w = width;
     states[2][5].h = height;
 
     //left
+
     states[3][0].x = 0; 
-    states[3][0].y = 0;
+    states[3][0].y = 360;
     states[3][0].w = width;
     states[3][0].h = height;
 
-    states[3][1].x = 175;
-    states[3][1].y = 0;
+    states[3][1].x = 120;
+    states[3][1].y = 360;
     states[3][1].w = width;
     states[3][1].h = height;
 
-    states[3][2].x = 350; 
-    states[3][2].y = 0;
+    states[3][2].x = 240; 
+    states[3][2].y = 360;
     states[3][2].w = width;
     states[3][2].h = height;
 
-    states[3][3].x = 525;
-    states[3][3].y = 0;
+    states[3][3].x = 360;
+    states[3][3].y = 360;
     states[3][3].w = width;
     states[3][3].h = height;
 
-    states[3][4].x = 700; 
-    states[3][4].y = 0;
+    states[3][4].x = 480; 
+    states[3][4].y = 360;
     states[3][4].w = width;
     states[3][4].h = height;
 
-    states[3][5].x = 875; 
-    states[3][5].y = 0;
+    states[3][5].x = 600; 
+    states[3][5].y = 360;
     states[3][5].w = width;
     states[3][5].h = height;
   
@@ -170,7 +208,7 @@ bool player::check_collision(Sprite *obstacle)
 
 void player::handle_events(SDL_Event &event)
 {
-  int velocity = 20;
+  int velocity = 25;
   
   //If a key was pressed
   if( event.type == SDL_KEYDOWN )
@@ -212,7 +250,7 @@ void player::move()
   offSetY += velocityY;
   
   // Check boundary conditions
-  if( ( offSetY < 0 ) || ( offSetY > SCREEN_HEIGHT ) )
+  if( ( offSetY < 0 ) || ( offSetY + height > SCREEN_HEIGHT ) )
     {
       offSetY -= velocityY;
     }

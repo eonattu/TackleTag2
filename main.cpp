@@ -20,7 +20,7 @@ int main(int argc, char* args[]){
     }
 
 
-    player playerND("player.bmp", 255, 255, 255);
+    player playerND("player1.bmp", 255, 255, 255);
 
     //The frame rate regulator
     Timer fps;
