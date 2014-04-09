@@ -223,18 +223,19 @@ void player::handle_events(SDL_Event &event)
         }
     }
   
-  //If a key was released
-    else if( event.type == SDL_KEYUP )
-      {
-        //Adjust the velocity
-        switch( event.key.keysym.sym )
-	  {
-	  case SDLK_UP: velocityY += velocity; break;
+  //If a key was released, spot
+  else if( event.type == SDL_KEYUP )
+    {
+      //Adjust the velocity
+      switch( event.key.keysym.sym )
+	{
+	case SDLK_UP: velocityY += velocity; break;
 	  case SDLK_DOWN: velocityY -= velocity; break;
-	  case SDLK_LEFT: velocityX += velocity; break;
-	  case SDLK_RIGHT: velocityX -= velocity; break;
-	  }
-      }
+	case SDLK_LEFT: velocityX += velocity; break;
+	case SDLK_RIGHT: velocityX -= velocity; break;
+	}
+    }
+  
 }
 
 void player::move()
