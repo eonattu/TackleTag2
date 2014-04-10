@@ -1,4 +1,4 @@
-/// Author: Adrian A. Gerbaud H., Alejandra Aranguren, Edwin Onattu
+// Author: Adrian A. Gerbaud H., Alejandra Aranguren, Edwin Onattu
 // This are some functions that are used all around the program. Inluded here for ease in programming and debugging.
 
 #ifndef GLOBAL_H
