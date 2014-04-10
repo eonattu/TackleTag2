@@ -225,7 +225,7 @@ double dist8oclock =sqrt(pow((xdiff-velocity),2)+pow((ydiff+velocity),2));
 double dist11oclock = sqrt(pow((xdiff-velocity),2)+pow((ydiff-velocity),2));
 int direction;
 
-if ((counter % 20) ==1)
+if ((counter % 3) ==1)
 {	
 direction = (rand() % 4 +1);
 }

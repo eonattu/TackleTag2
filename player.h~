@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include <cstdlib>
 
 #ifndef PLAYER_H
 #define PLAYER_H

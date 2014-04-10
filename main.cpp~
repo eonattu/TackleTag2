@@ -45,7 +45,7 @@ int main(int argc, char* args[]){
 	  {
 	    	playerUSC.counter++;
 	    playerND.handle_events(event);
-	    
+	    playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
 	    
 	    //If the user has Xed out the window
 	    if(event.type == SDL_QUIT)
@@ -54,7 +54,7 @@ int main(int argc, char* args[]){
 		quit = true;
 	      }
 	  }
-	playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
+	
 	
 	playerND.move();
 	playerUSC.move();
