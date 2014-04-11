@@ -12,23 +12,24 @@
 
 int main(int argc, char* args[]){
 
-  		srand (time(NULL));
+  srand (time(NULL));
   		
     //Quit flag
-    bool quit = false;
+  bool quit = false;
+  
+  //Initialize
+  if(init() == false){
+    return 1;
+  }
 
-    //Initialize
-    if(init() == false){
-        return 1;
-    }
-
-
-    player playerND("player1.bmp", 255, 255, 255);
-		player playerUSC("player1.bmp", 255, 255, 255);
-    //The frame rate regulator
-    Timer fps;
-
-    //The background
+  
+  player playerND("player1.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
+  player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
+  
+  //The frame rate regulator
+  Timer fps;
+  
+  //The background
     Background background("background.bmp",screen);
     
     playerUSC.counter = 1;

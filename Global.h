@@ -10,8 +10,8 @@
 #include <iostream>
 
 //variables
-const int SCREEN_WIDTH = 960;
-const int SCREEN_HEIGHT = 576;
+const int SCREEN_WIDTH = 1650;
+const int SCREEN_HEIGHT = 990;
 const int SCREEN_BPP = 32;
 
 const int FRAMES_PER_SECOND = 10;

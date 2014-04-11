@@ -6,7 +6,7 @@
 #include "SDL/SDL_image.h"
 #include <string>
 
-Sprite::Sprite(int count):states(count,vector<SDL_Rect>(15)), SCREEN_WIDTH(960),SCREEN_HEIGHT(576), SCREEN_BPP(32), FRAMES_PER_SECOND(10), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){} //constructor
+Sprite::Sprite(int count):states(count,vector<SDL_Rect>(15)), SCREEN_WIDTH(1650),SCREEN_HEIGHT(990), SCREEN_BPP(32), FRAMES_PER_SECOND(10), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){} //constructor
 
 bool Sprite::getHasCollided(){return hasCollided;} //returns variable tracking whether object has collided
 

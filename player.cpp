@@ -6,14 +6,14 @@
 #include <cmath>
 #include <cstdlib>
 
-player::player(std::string filename, int r, int g, int b):Sprite(4), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){ //constructor
+player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(4), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){ //constructor
     //Initialize sprite dimensions
     height = 120;
     width = 120;
 
     //Initialize movement variables
-    offSetY = 0;
-    offSetX = 0;
+    offSetY = x;
+    offSetX = y;
     velocityX = 0;
     velocityY = 0;
 	
@@ -225,39 +225,39 @@ double dist8oclock =sqrt(pow((xdiff-velocity),2)+pow((ydiff+velocity),2));
 double dist11oclock = sqrt(pow((xdiff-velocity),2)+pow((ydiff-velocity),2));
 int direction;
 
-if ((counter % 20) ==1)
-{	
-direction = (rand() % 4 +1);
-}
-else
-{
-	if ((distright >= distance) && (distright>=distleft) && (distright >=distdown) && (distright >=distup))
+ if ((counter % 20) ==1) 
+   {	
+     direction = (rand() % 4 +1); // does random move
+   }
+ else
+   {
+     if ((distright >= distance) && (distright>=distleft) && (distright >=distdown) && (distright >=distup))
+       {
+	 direction = 4;
+       }
+     else if ((distleft >= distance) && (distleft>=distright) && (distleft >=distdown) && (distleft >=distup))
 	{
-		direction = 4;
+	  direction = 3;
 	}
-	else if ((distleft >= distance) && (distleft>=distright) && (distleft >=distdown) && (distleft >=distup))
-	{
-		direction = 3;
-	}
-	else if((distdown >= distance) && (distdown>=distleft) && (distdown >=distright) && (distdown >=distup))
-	{
-		direction = 2;
-	}
-	else if ((distup >= distance) && (distup>=distleft) && (distup >=distdown) && (distup >=distright))
-	{
+     else if((distdown >= distance) && (distdown>=distleft) && (distdown >=distright) && (distdown >=distup))
+       {
+	 direction = 2;
+       }
+     else if ((distup >= distance) && (distup>=distleft) && (distup >=distdown) && (distup >=distright))
+       {
 	 direction = 1;
 	}
-}
-
-switch(direction)
-	{
-	case 1: velocityY -= velocity; break;
-	case 2: velocityY  += velocity; break;
-	case 3: velocityX -= velocity; break;
-	case 4: velocityX  += velocity; break;
-
-	}
-
+   }
+ 
+ switch(direction)
+   {
+   case 1: velocityY -= velocity; break;
+   case 2: velocityY  += velocity; break;
+   case 3: velocityX -= velocity; break;
+   case 4: velocityX  += velocity; break;
+	  
+   }
+ 
 }
 
 void player::handle_events(SDL_Event &event)
@@ -284,7 +284,7 @@ void player::handle_events(SDL_Event &event)
       switch( event.key.keysym.sym )
 	{
 	case SDLK_UP: velocityY += velocity; break;
-	  case SDLK_DOWN: velocityY -= velocity; break;
+	case SDLK_DOWN: velocityY -= velocity; break;
 	case SDLK_LEFT: velocityX += velocity; break;
 	case SDLK_RIGHT: velocityX -= velocity; break;
 	}

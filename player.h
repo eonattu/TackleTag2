@@ -10,7 +10,7 @@
 
 class player : public Sprite {
  public:
-  player(std::string,int,int,int);
+  player(std::string,int,int,int, int, int); // last two are x and y pos
   virtual void move();
   virtual void show(SDL_Surface *);
   virtual void set_clips(); //sets sprite sheet position clips
