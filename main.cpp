@@ -65,6 +65,14 @@ int main(int argc, char* args[]){
 	
 	
 		    playerUSC.handle_AIadjust();
+		    
+	if (playerND.collisioncheck(playerUSC.getOffSetX(),playerUSC.getOffSety() ) )
+	{
+		
+		quit = true;
+	}
+		    
+		    
 	//Update the screen
         SDL_Flip(screen);
 	//SDL_Flip(playerND.sprite);	
