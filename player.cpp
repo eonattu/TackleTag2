@@ -201,9 +201,15 @@ int player::collision(){return 0;}
 
 void player::setIsVisible(bool vis){isVisible = vis;} 
 
-bool player::check_collision(Sprite *obstacle)
+int player::collisioncheck(int computerX, int computerY)
 {
-  // to be instatiated later
+    double xdiff = (double)computerX - (double)offSetX;
+    double ydiff =  (double)computerY - (double)offSetY;
+    double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
+
+    if (distance <= PLAYER_WIDTH/2) return 1;
+    else return 0;
+
 }
 
 void player::handle_AI(int userx, int usery)
