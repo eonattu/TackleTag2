@@ -207,7 +207,7 @@ int player::collisioncheck(int computerX, int computerY)
     double ydiff =  (double)computerY - (double)offSetY;
     double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
 
-    if (distance <= PLAYER_WIDTH/2) return 1;
+    if (distance <= width/2) return 1;
     else return 0;
 
 }
