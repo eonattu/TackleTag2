@@ -66,7 +66,7 @@ int main(int argc, char* args[]){
 	
 		    playerUSC.handle_AIadjust();
 		    
-	if (playerND.collisioncheck(playerUSC.getOffSetX(),playerUSC.getOffSety() ) )
+	if (playerND.collisioncheck(playerUSC.getOffSetX(),playerUSC.getOffSetY() ) )
 	{
 		
 		quit = true;
