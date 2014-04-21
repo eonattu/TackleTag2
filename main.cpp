@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "player.h"
 #include "sprite.h"
+#include "scoreCounter.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -27,6 +28,8 @@ int main(int argc, char* args[]){
   player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
   bool tackle = false;
   bool fall = false;
+  // int score = 0;
+  //scoreCounter scoreCount("number.bmp", 255, 255, 255);
   //The frame rate regulator
   Timer fps;
   
@@ -42,6 +45,8 @@ int main(int argc, char* args[]){
 
 	fps.start();
 	playerND.setIsVisible(true);
+	//	scoreCount.setTitle(true);
+
 	//While there's events to handle
         while(SDL_PollEvent(&event))
 	  {
@@ -74,13 +79,20 @@ int main(int argc, char* args[]){
 
 	playerND.move();
 	playerUSC.move();
-        background.show(screen);
+       
+	    
+	//	score += 10;
+	//scoreCount.setScore(score);
+
+	//scoreCount.show(screen, false, false);
+	background.show(screen);
 	playerND.show(screen, false, fall); // nd will never tackle
 	playerUSC.show(screen, tackle, false); // usc will never fall
-	
-	
-    
-		    
+
+
+
+
+
 	//Update the screen
         SDL_Flip(screen);
 	//SDL_Flip(playerND.sprite);	
@@ -91,6 +103,7 @@ int main(int argc, char* args[]){
 	  {
 	    SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
 	  }
+       
 		
       }
     //Clean up

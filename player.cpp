@@ -560,8 +560,7 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
 	{ 
 	  apply_surface(sprite, screen, &states[7][frame] );
 	}
-      
-      
+     
       
     }
 } 

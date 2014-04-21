@@ -1,7 +1,7 @@
 all: main
 
-main: main.o background.o Timer.o sprite.o player.o
-	g++ main.o Timer.o background.o sprite.o player.o -lSDL -lSDL_image -o main
+main: main.o background.o Timer.o sprite.o player.o scoreCounter.o
+	g++ main.o Timer.o background.o sprite.o player.o scoreCounter.o -lSDL -lSDL_image -o main
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -17,6 +17,9 @@ sprite.o: sprite.cpp
 
 player.o: player.cpp
 	g++ -c player.cpp
+
+scoreCounter.o: scoreCounter.cpp
+	g++ -c scoreCounter.cpp
 
 clean: 
 	rm -f *.o main
