@@ -25,7 +25,8 @@ int main(int argc, char* args[]){
   
   player playerND("player1.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
   player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
-  
+  bool tackle = false;
+  bool fall = false;
   //The frame rate regulator
   Timer fps;
   
@@ -44,7 +45,7 @@ int main(int argc, char* args[]){
 	//While there's events to handle
         while(SDL_PollEvent(&event))
 	  {
-	    	playerUSC.counter++;
+	    playerUSC.counter++;
 	    playerND.handle_events(event);
 	    
 	    
@@ -55,23 +56,30 @@ int main(int argc, char* args[]){
 		quit = true;
 	      }
 	  }
+
+
+	playerUSC.handle_AIadjust();
+
 	playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
 	
+
+	
+	tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 60);
+	fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),30);
+	//	cout << tackle << endl;
+	
+	
+	
+	
+
 	playerND.move();
 	playerUSC.move();
-	background.show(screen);
-	playerND.show(screen);
-	playerUSC.show(screen);
+        background.show(screen);
+	playerND.show(screen, false, fall); // nd will never tackle
+	playerUSC.show(screen, tackle, false); // usc will never fall
 	
 	
-		    playerUSC.handle_AIadjust();
-		    	    
-	if (playerND.collisioncheck(playerUSC.getOffSetX(),playerUSC.getOffSetY() ) )
-	{
-		
-		quit = true;
-	}
-		    	    
+    
 		    
 	//Update the screen
         SDL_Flip(screen);

@@ -15,7 +15,7 @@ class Sprite
   Sprite(int); //constructor
   void apply_surface(SDL_Surface *,SDL_Surface *,SDL_Rect *); //applies new surface
   virtual void move()=0; // handles the movement of the sprite
-  virtual void show(SDL_Surface *)=0; // updates the frames of the sprite sheet shown based on conditional logic
+  virtual void show(SDL_Surface *, bool, bool)=0; // updates the frames of the sprite sheet shown based on conditional logic
   virtual void set_clips()=0; //clips sprite sheet
   virtual int collision()=0; //handles collision with another object
   SDL_Surface * load_image(std::string,int,int,int); //takes in image of sprite
