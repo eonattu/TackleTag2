@@ -6,7 +6,8 @@
 #include <cmath>
 #include <cstdlib>
 
-player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(4), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3){ //constructor
+player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(8), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3), TDown(4), TUp(5), TRight(6), TLeft(7)
+{
     //Initialize sprite dimensions
     height = 120;
     width = 120;
@@ -173,6 +174,166 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[3][5].y = 360;
     states[3][5].w = width;
     states[3][5].h = height;
+
+    // We can make the height more precise
+
+    //TRight
+
+    states[6][0].x = 0; 
+    states[6][0].y = 480;
+    states[6][0].w = 66;
+    states[6][0].h = height;
+
+    states[6][1].x = 247;
+    states[6][1].y = 480;
+    states[6][1].w = 93;
+    states[6][1].h = height;
+
+    states[6][2].x = 493; 
+    states[6][2].y = 480;
+    states[6][2].w = 122;
+    states[6][2].h = height;
+    
+
+    states[6][3].x = 35; 
+    states[6][3].y = 600;
+    states[6][3].w = 149;
+    states[6][3].h = height;
+
+    states[6][4].x = 300;
+    states[6][4].y = 600;
+    states[6][4].w = 160;
+    states[6][4].h = height;
+
+    states[6][5].x = 575; 
+    states[6][5].y = 600;
+    states[6][5].w = 145;
+    states[6][5].h = height;
+
+    // TLeft
+
+    states[7][0].x = 172; 
+    states[7][0].y = 720;
+    states[7][0].w = 69;
+    states[7][0].h = height;
+
+    states[7][1].x = 381;
+    states[7][1].y = 475;
+    states[7][1].w = 93;
+    states[7][1].h = height;
+
+    states[7][2].x = 586; 
+    states[7][2].y = 720;
+    states[7][2].w = 122;
+    states[7][2].h = height;
+    
+    
+    states[7][3].x = 56; 
+    states[7][3].y = 840;
+    states[7][3].w = 149;
+    states[7][3].h = height;
+
+    states[7][4].x = 259;
+    states[7][4].y = 840;
+    states[7][4].w = 162;
+    states[7][4].h = height;
+
+    states[7][5].x = 476; 
+    states[7][5].y = 840;
+    states[7][5].w = 148;
+    states[7][5].h = height;
+
+    
+    // TUp
+
+    states[5][0].x = 0; 
+    states[5][0].y = 960;
+    states[5][0].w = width;
+    states[5][0].h = 2*height;
+
+    states[5][1].x = 120;
+    states[5][1].y = 960;
+    states[5][1].w = width;
+    states[5][1].h = 2*height;
+
+    states[5][2].x = 240; 
+    states[5][2].y = 960;
+    states[5][2].w = width;
+    states[5][2].h = 2*height;
+
+    states[5][3].x = 360;
+    states[5][3].y = 960;
+    states[5][3].w = width;
+    states[5][3].h = 2*height;
+
+    states[5][4].x = 480; 
+    states[5][4].y = 960;
+    states[5][4].w = width;
+    states[5][4].h = 2*height;
+
+    states[5][5].x = 600; 
+    states[5][5].y = 960;
+    states[5][5].w = width;
+    states[5][5].h = 2*height;
+
+    // TDown
+
+    states[4][0].x = 0; 
+    states[4][0].y = 1200;
+    states[4][0].w = width;
+    states[4][0].h = 2*height;
+
+    states[4][1].x = 120;
+    states[4][1].y = 1200;
+    states[4][1].w = width;
+    states[4][1].h = 2*height;
+
+    states[4][2].x = 240; 
+    states[4][2].y = 1200;
+    states[4][2].w = width;
+    states[4][2].h = 2*height;
+
+    states[4][3].x = 360;
+    states[4][3].y = 1200;
+    states[4][3].w = width;
+    states[4][3].h = 2*height;
+
+    states[4][4].x = 480; 
+    states[4][4].y = 1200;
+    states[4][4].w = width;
+    states[4][4].h = 2*height;
+
+    states[4][5].x = 600; 
+    states[4][5].y = 1200;
+    states[4][5].w = width;
+    states[4][5].h = 2*height;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 }
 
@@ -324,23 +485,21 @@ void player::move()
 
 
 void player::show(SDL_Surface *screen)
-{ //shows correct sprite of otter for each frame based upon state
+{
+  
   if(isVisible)
     {
       if(velocityY > 0)
 	{
-	  status = SPRITE_DOWN; // set animation status to down
+	  status = SPRITE_DOWN;
 	  
-	  
-	  //Move to the next frame in the animation
-	  frame++;
+      	  frame++;
 	}
       
-      //If Sprite is moving up
       else if(velocityY < 0 )
 	{
 	  status = SPRITE_UP;
-	  frame++; //Move to the next frame in the animation
+	  frame++;
 	}
       
       else if(velocityX > 0)
@@ -356,10 +515,16 @@ void player::show(SDL_Surface *screen)
 	}
       
 
+      // Reset if more thn 5
+
       if(frame>5)
 	{ 
 	  frame=0;
 	}
+
+
+
+      // Apply the surface
       
       if( status == SPRITE_DOWN )
 	{
@@ -381,6 +546,27 @@ void player::show(SDL_Surface *screen)
 	{ 
 	  apply_surface(sprite, screen, &states[3][frame] );
 	}
+
+      else if( status == TDown)
+	{ 
+	  apply_surface(sprite, screen, &states[4][frame] );
+	}
+
+      else if( status == TUp)
+	{ 
+	  apply_surface(sprite, screen, &states[5][frame] );
+	}
+      
+      else if( status == TRight)
+	{ 
+	  apply_surface(sprite, screen, &states[6][frame] );
+	}
+
+      else if( status == TLeft)
+	{ 
+	  apply_surface(sprite, screen, &states[7][frame] );
+	}
+     
       
 
     }

@@ -51,7 +51,11 @@ class Sprite
   const int SPRITE_UP;
   const int SPRITE_LEFT;
   const int SPRITE_RIGHT;
-  
+
+  const int TDown;
+  const int TUp;
+  const int TLeft;
+  const int TRight;
   
 };
 

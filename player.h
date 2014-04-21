@@ -12,7 +12,7 @@ class player : public Sprite {
  public:
   player(std::string,int,int,int, int, int); // last two are x and y pos
   virtual void move();
-  virtual void show(SDL_Surface *);
+  virtual void show(SDL_Surface *); // CHANGE HERE
   virtual void set_clips(); //sets sprite sheet position clips
   virtual int getOffSetX(); //returns x position coordinate
   virtual int getOffSetY(); //returns y position coordinate 
@@ -38,6 +38,13 @@ protected:
   const int SPRITE_UP;
   const int SPRITE_RIGHT;
   const int SPRITE_LEFT;
+
+   const int TDown;
+  const int TUp;
+  const int TLeft;
+  const int TRight;
+
+
   
 };
 
