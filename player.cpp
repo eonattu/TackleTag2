@@ -39,47 +39,6 @@ void player::setDead(bool dead)
 {
 	if(dead) isDead = true;
 	else isDead = false;
-}#include "sprite.h"
-#include "player.h"
-#include "SDL/SDL.h"
-#include <vector>
-#include <string>
-#include <cmath>
-#include <cstdlib>
-#include<iostream>
-
-player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(8), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3), TDown(4), TUp(5), TRight(6), TLeft(7)
-{
-    //Initialize sprite dimensions
-    height = 120;
-    width = 120;
-
-    //Initialize movement variables
-    offSetY = x;
-    offSetX = y;
-    velocityX = 0;
-    velocityY = 0;
-	
-    isStarting = true;
-
-    //Initialize animation variables
-    frame = 0;
-    status = SPRITE_LEFT;
-
-    //Sprite pointer
-    sprite = load_image(filename,r,g,b);
-
-    //Initialize States
-    set_clips();
-    
-    isVisible = true;
-    isDead = false;
-}
-
-void player::setDead(bool dead)
-{
-	if(dead) isDead = true;
-	else isDead = false;
 }
 
 void player::set_clips(){ //sets sprite sheet clip positions
