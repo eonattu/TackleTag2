@@ -6,6 +6,7 @@
 #include "player.h"
 #include "sprite.h"
 #include "scoreCounter.h"
+#include "menuScreen.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -17,6 +18,7 @@ int main(int argc, char* args[]){
   		
     //Quit flag
   bool quit = false;
+  bool start = false;
   
   //Initialize
   if(init() == false){
@@ -28,13 +30,15 @@ int main(int argc, char* args[]){
   player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
   bool tackle = false;
   bool fall = false;
-  // int score = 0;
-  //scoreCounter scoreCount("number.bmp", 255, 255, 255);
+ 
   //The frame rate regulator
   Timer fps;
   
   //The background
     Background background("background.bmp",screen);
+    background.show(screen);
+
+    MenuScreen menu("Welcome.bmp", 255,255,0);
     
     playerUSC.counter = 1;
     
@@ -42,10 +46,34 @@ int main(int argc, char* args[]){
     
     while(quit == false)
       {
-
+	while(start == false)
+	  {
+	    Timer mps;
+	    mps.start();
+	     
+	    while(SDL_PollEvent(&event))
+	      {
+		start=menu.handle_event(event);
+	      }
+	    
+	    menu.show(screen,false, false);
+	    SDL_Flip(screen);
+	   
+	    
+	    if (mps.get_ticks() < 1000/ FRAMES_PER_SECOND)
+	      {
+		SDL_Delay( ( 1000/FRAMES_PER_SECOND) - mps.get_ticks() );
+	      }
+	    
+	    playerND.setIsVisible(true);
+	    playerUSC.setIsVisible(true);
+	    playerND.setStarting(true);
+	    playerUSC.setStarting(true);
+	  }
+       
 	fps.start();
 	playerND.setIsVisible(true);
-	//	scoreCount.setTitle(true);
+	//scoreCount.setTitle(true);
 
 	//While there's events to handle
         while(SDL_PollEvent(&event))
