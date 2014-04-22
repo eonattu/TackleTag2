@@ -58,12 +58,11 @@ int main(int argc, char* args[]){
 	    while(SDL_PollEvent(&event))
 	      {
 		start=menu.handle_event(event);
+		 
 	      }
 	    
 	    menu.show(screen,false, false);
-	    //scoreCount.show(screen,false,false);
 	    SDL_Flip(screen);
-	    //SDL_Flip(scoreCount.sprite);
 	   
 	    
 	    if (mps.get_ticks() < 1000/ FRAMES_PER_SECOND)
@@ -87,6 +86,7 @@ int main(int argc, char* args[]){
 		
 
 	scoreCount.setTitle(true);
+	menu.setHasPlayed(true);
 	fps.start();
 
 	//While there's events to handle
@@ -145,6 +145,27 @@ int main(int argc, char* args[]){
 	    SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
 	  }
        
+
+	if(fall == true)
+	  {
+	    start = false;
+	    score = 0;
+	    tackle = false;
+	    fall = false;
+	    playerND.setOffSetX(SCREEN_WIDTH/2);
+	    playerND.setOffSetY(SCREEN_HEIGHT/2);
+
+	    playerUSC.setOffSetX(0);
+	    playerUSC.setOffSetY(0);
+		    
+	    playerUSC.handle_AIadjust();
+	    playerND.handle_AIadjust();
+
+
+	  }
+
+
+
 		
       }
     //Clean up

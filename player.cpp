@@ -327,6 +327,11 @@ void player::setOffSetY(int num)
   offSetY = num;
 }
 
+void player::setOffSetX(int num)
+{
+  offSetX=num;
+}
+
 void player::setStarting(bool val)
 {
   isStarting = val;
@@ -571,3 +576,12 @@ int player::getStatus()
   return status;
 }
 
+void player:: setStatus(int num)
+{
+  status = num;
+}
+
+void player:: setFrame(int num)
+{
+  frame = num;
+}
