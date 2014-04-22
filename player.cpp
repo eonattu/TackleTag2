@@ -359,7 +359,7 @@ double xdiff = (double)userx - (double)offSetX;
 double ydiff = (double)usery - (double)offSetY;
 
 double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
-double velocity = 25;
+double velocity = 40;
 
 double distright = sqrt(pow((xdiff+velocity),2) + pow(ydiff,2));
 double distleft = sqrt(pow((xdiff-velocity),2) + pow(ydiff,2));
