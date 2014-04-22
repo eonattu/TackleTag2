@@ -126,12 +126,15 @@ void scoreCounter::show(SDL_Surface *screen, bool, bool)
 
 { 
   int xPos = SCREEN_WIDTH - (28*6);
-  isStarted = false;
+  isStarted = true;
   int digits=0;
+
   for(int i=6;i>0;i--){
     frame = score / (pow(10,i-1));
     frame = frame % 10;
-    if (isStarted || frame!=0){
+
+    if (isStarted || frame!=0)
+      {
 		if (title){
       		apply_surface(xPos,0,sprite, screen, &states[0][frame]);
 		}else{

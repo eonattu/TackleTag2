@@ -41,6 +41,9 @@ int main(int argc, char* args[]){
     MenuScreen menu("Welcome.bmp", 255,255,0);
     
     playerUSC.counter = 1;
+   
+    scoreCounter scoreCount("numbers.bmp",255,255,255);
+    int score = 0;
     
     // Start game
     
@@ -50,6 +53,7 @@ int main(int argc, char* args[]){
 	  {
 	    Timer mps;
 	    mps.start();
+	    scoreCount.setTitle(false);
 	     
 	    while(SDL_PollEvent(&event))
 	      {
@@ -57,7 +61,9 @@ int main(int argc, char* args[]){
 	      }
 	    
 	    menu.show(screen,false, false);
+	    //scoreCount.show(screen,false,false);
 	    SDL_Flip(screen);
+	    //SDL_Flip(scoreCount.sprite);
 	   
 	    
 	    if (mps.get_ticks() < 1000/ FRAMES_PER_SECOND)
@@ -65,15 +71,23 @@ int main(int argc, char* args[]){
 		SDL_Delay( ( 1000/FRAMES_PER_SECOND) - mps.get_ticks() );
 	      }
 	    
-	    playerND.setIsVisible(true);
-	    playerUSC.setIsVisible(true);
+	    if(score > 0)
+	      {
+		score = 0;
+		
+		playerND.setIsVisible(true);
+		playerUSC.setIsVisible(true);
+		
+	      }
 	    playerND.setStarting(true);
 	    playerUSC.setStarting(true);
 	  }
-       
+	
+	// BEGIN GAME
+		
+
+	scoreCount.setTitle(true);
 	fps.start();
-	playerND.setIsVisible(true);
-	//scoreCount.setTitle(true);
 
 	//While there's events to handle
         while(SDL_PollEvent(&event))
@@ -92,14 +106,12 @@ int main(int argc, char* args[]){
 
 
 	playerUSC.handle_AIadjust();
-
 	playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
-	
-
 	
 	tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 60);
 	fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),30);
-	//	cout << tackle << endl;
+	
+	//   cout << tackle << endl;
 	
 	
 	
@@ -109,13 +121,14 @@ int main(int argc, char* args[]){
 	playerUSC.move();
        
 	    
-	//	score += 10;
-	//scoreCount.setScore(score);
+	score += 10;
+	scoreCount.setScore(score);
 
 	//scoreCount.show(screen, false, false);
 	background.show(screen);
 	playerND.show(screen, false, fall); // nd will never tackle
 	playerUSC.show(screen, tackle, false); // usc will never fall
+	scoreCount.show(screen, false, false);
 
 
 
