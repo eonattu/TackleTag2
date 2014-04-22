@@ -27,7 +27,7 @@ int main(int argc, char* args[]){
 
   
   player playerND("player1.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
-  player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
+  player playerUSC("player1.bmp", 255, 255, 255,0 ,SCREEN_WIDTH/2);
   bool tackle = false;
   bool fall = false;
  
@@ -155,7 +155,7 @@ int main(int argc, char* args[]){
 	    playerND.setOffSetX(SCREEN_WIDTH/2);
 	    playerND.setOffSetY(SCREEN_HEIGHT/2);
 
-	    playerUSC.setOffSetX(0);
+	    playerUSC.setOffSetX(SCREEN_WIDTH/2);
 	    playerUSC.setOffSetY(0);
 		    
 	    playerUSC.handle_AIadjust();
