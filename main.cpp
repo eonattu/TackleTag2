@@ -108,8 +108,8 @@ int main(int argc, char* args[]){
 	playerUSC.handle_AIadjust();
 	playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
 	
-	tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 240);
-	fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),120);
+	tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 120);
+	fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),60);
 	
 	//   cout << tackle << endl;
 	
