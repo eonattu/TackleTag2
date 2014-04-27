@@ -11,6 +11,8 @@
 #include <cstdlib>
 
 #include<iostream>
+//Mix_Music *titelmusic = NULL;
+
 
 int main(int argc, char* args[]){
 
@@ -25,11 +27,12 @@ int main(int argc, char* args[]){
     return 1;
   }
 
-  vector<Sprite*> obstacles; // This will hold coins
 
-  
-  player playerND("ND_Player.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
-  player playerUSC("USC_Player.bmp", 255, 255, 255,0 ,SCREEN_WIDTH/2);
+	//titlemusic = Mix_LoadMUS("Title1.wav");
+	
+  player playerND("player1.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
+  player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
+  // player playerUSC2("player1.bmp", 255, 255, 255,255 ,0);
   bool tackle = false;
   bool fall = false;
  
@@ -37,35 +40,40 @@ int main(int argc, char* args[]){
   Timer fps;
   
   //The background
-  Background background("background.bmp",screen);
-  background.show(screen);
+    Background background("background.bmp",screen);
+    background.show(screen);
 
-  MenuScreen menu("Welcome.bmp", 255,255,0);
+    MenuScreen menu("Welcome.bmp", 255,255,0);
     
-  playerUSC.counter = 1;
-   
-  scoreCounter scoreCount("ND_Player.bmp",255,255,255);
-  int score = 0;
-  
-  // Start game
-  
-  while(quit == false)
-    {
-      while(start == false)
-	{
-	  Timer mps;
+    playerUSC.counter = 1;
+    //     playerUSC2.counter = 1;
+    scoreCounter scoreCount("numbers.bmp",255,255,255);
+    int score = 0;
+    
+    // Start game
+      
+    while(quit == false)
+      {
+	while(start == false)
+	  {
+	  //if ( titlemusic)
+		//{
+		//Mix_PlayMusic(music,1);
+		//}  
+	    Timer mps;
 	    mps.start();
 	    scoreCount.setTitle(false);
-	    
+	     
 	    while(SDL_PollEvent(&event))
 	      {
+	    
 		start=menu.handle_event(event);
-		
+		 
 	      }
 	    
 	    menu.show(screen,false, false);
 	    SDL_Flip(screen);
-	    
+	   
 	    
 	    if (mps.get_ticks() < 1000/ FRAMES_PER_SECOND)
 	      {
@@ -78,64 +86,86 @@ int main(int argc, char* args[]){
 		
 		playerND.setIsVisible(true);
 		playerUSC.setIsVisible(true);
+		//				playerUSC2.setIsVisible(true);
 		
 	      }
 	    playerND.setStarting(true);
 	    playerUSC.setStarting(true);
-	}
-      
-      // BEGIN GAME
-      
-      
-      scoreCount.setTitle(true);
-      menu.setHasPlayed(true);
-      fps.start();
-      
-      //While there's events to handle
-      while(SDL_PollEvent(&event))
-	{
-	  playerUSC.counter++;
-	  playerND.handle_events(event);
-	  
-	  
-	  //If the user has Xed out the window
-	  if(event.type == SDL_QUIT)
-	    {
-	      //Quit the program
-	      quit = true;
+	    //	    	    playerUSC2.setStarting(true);
+	  }
+	
+	// BEGIN GAME
+		
+
+	scoreCount.setTitle(true);
+	menu.setHasPlayed(true);
+	fps.start();
+
+	//While there's events to handle
+        while(SDL_PollEvent(&event))
+	  {
+	 
+	//  Mix_HaltMusic();
+	    playerUSC.counter++;
+	    //  playerUSC2.counter++;
+	    playerND.handle_events(event);
+
+	    
+	    //If the user has Xed out the window
+	   if(event.type == SDL_QUIT)
+	      {
+		//Quit the program
+		quit = true;
 	      }
-	}
-      
-      
-      playerUSC.handle_AIadjust();
-      playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
-      
-      tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 120);
-      fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),60);
-      
-      playerND.move();
-      playerUSC.move();
-      
-      
-      score += 10;
-      scoreCount.setScore(score);
-      
-      //scoreCount.show(screen, false, false);
-      background.show(screen);
-      playerND.show(screen, false, fall); // nd will never tackle
-      playerUSC.show(screen, tackle, false); // usc will never fall
-      scoreCount.show(screen, false, false);
-      
-      //Update the screen
-        SDL_Flip(screen);	
+	  }
+
+
+	playerUSC.handle_AIadjust();
+	//	playerUSC2.handle_AIadjust();
+	playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
+	//	playerUSC2.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
+	tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 120);
+	fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),60);
+	
+	//	tackle = playerUSC2.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 120);
+	// fall = playerUSC2.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),60);
+	
+	//   cout << tackle << endl;
+	
+	
+	
+	
+
+	playerND.move();
+	playerUSC.move();
+      	//playerUSC2.move(); 
+	    
+	score += 10;
+	scoreCount.setScore(score);
+
+	//scoreCount.show(screen, false, false);
+	background.show(screen);
+	playerND.show(screen, false, fall); // nd will never tackle
+	playerUSC.show(screen, tackle, false); // usc will never fall
+	//	playerUSC2.show(screen, tackle, false); // usc will never fall
+	scoreCount.show(screen, false, false);
+
+
+
+
+
+	//Update the screen
+        SDL_Flip(screen);
+	//SDL_Flip(playerND.sprite);	
+
 	
 	//Cap the frame rate
         if(fps.get_ticks() < 1000 / FRAMES_PER_SECOND)
 	  {
 	    SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
 	  }
-	
-	
+       
+
 	if(fall == true)
 	  {
 	    start = false;
@@ -144,15 +174,22 @@ int main(int argc, char* args[]){
 	    fall = false;
 	    playerND.setOffSetX(SCREEN_WIDTH/2);
 	    playerND.setOffSetY(SCREEN_HEIGHT/2);
-	    
-	    playerUSC.setOffSetX(SCREEN_WIDTH/2);
+	    playerUSC.counter = 1;
+	    playerUSC.setOffSetX(0);
 	    playerUSC.setOffSetY(0);
-	    
+	    //playerUSC2.setOffSetX(255);
+	    //playerUSC2.setOffSetY(0);
+		    
 	    playerUSC.handle_AIadjust();
+	    //    	   playerUSC2.handle_AIadjust();
 	    playerND.handle_AIadjust();
-	     
+
+
 	  }
-	
+
+
+
+		
       }
     //Clean up
     SDL_Quit();
