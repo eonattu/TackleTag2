@@ -1,7 +1,3 @@
-// Taylor Seale, Iheanyi Ekechukwu, Ryan Shea, Andrew Caron
-// Fundamentals of Computing II: Final Project
-// coin.cpp: This is the implemenation file for the coin class which controls the coin obstacles
-
 #include "sprite.h"
 #include "coin.h"
 #include "SDL/SDL.h"

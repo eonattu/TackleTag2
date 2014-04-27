@@ -520,12 +520,10 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
 
   if(isVisible)
     {
+
       if(velocityY > 0)
 	{
-	  if (tackle) status = TDown;
-	    
-	  
-	  
+	  if (tackle) status = TDown;	  
 	  else status = SPRITE_DOWN;
 	  
 	  frame++;
@@ -550,7 +548,6 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
       else if(velocityX < 0)
 	{
         
-
 	  if (tackle) status = TLeft;
 	  else status = SPRITE_LEFT;
 	  frame++;
@@ -569,7 +566,6 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
       
       if( status == SPRITE_DOWN )
 	{
-
 	  apply_surface(sprite, screen, &states[0][frame] ); 
 	}
       

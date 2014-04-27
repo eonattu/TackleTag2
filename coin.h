@@ -1,6 +1,4 @@
-// Taylor Seale, Iheanyi Ekechukwu, Ryan Shea, Andrew Caron
-// Fundamentals of Computing II: Final Project
-// coin.h: This is the header file for the coin class which controls the coin obstacles
+
 
 #include "SDL/SDL.h"
 #include "sprite.h"
