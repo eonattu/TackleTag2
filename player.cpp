@@ -357,10 +357,16 @@ void player::handle_AI(int userx, int usery)
 {
 double xdiff = (double)offSetX - (double)userx;
 double ydiff = (double)offSetY - (double)usery;
+//xdiff = sqrt(pow(xdiff,2));
+//ydiff = sqrt (pow(ydiff,2));
 
 double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
-double velocity = 20;
 
+double velocity = counter;
+if (velocity>20)
+{
+velocity=19+(.005*(double)counter);
+}
 double distright = sqrt(pow((xdiff+velocity),2) + pow(ydiff,2));
 double distleft = sqrt(pow((xdiff-velocity),2) + pow(ydiff,2));
 double distdown = sqrt(pow(xdiff,2)+pow((ydiff+velocity),2));
@@ -372,46 +378,46 @@ double dist8oclock =sqrt(pow((xdiff-velocity),2)+pow((ydiff+velocity),2));
 double dist11oclock = sqrt(pow((xdiff-velocity),2)+pow((ydiff-velocity),2));
 
 int direction = 4;
-
+cout << "\nvelocity: " << velocity;
  if ((counter % 20) ==1) 
    {	
      direction = (rand() % 8 +1); // does random move
    }
  else
    {
-     if ((distright <= distance) && (distright<=distleft) && (distright <=distdown) && (distright <=distup) && (distright <=dist2oclock) && (distright <=dist5oclock) && (distright <=dist8oclock) && (distright <=dist11oclock))
+     if ((distright <=distance) && (distright<=distleft) && (distright <=distdown) && (distright <=distup) && (distright <=dist2oclock) && (distright <=dist5oclock) && (distright <=dist8oclock) && (distright <=dist11oclock))
        {
 	 direction = 4;
        }
-     else if ((distleft <= distance) && (distleft<=distright) && (distleft <=distdown) && (distleft <=distup)&& (distleft <=dist2oclock) && (distleft <=dist5oclock) && (distleft <=dist8oclock) && (distleft <=dist11oclock))
+     else if ((distleft <=distance) && (distleft<=distright) && (distleft <=distdown) && (distleft <=distup)&& (distleft <=dist2oclock) && (distleft <=dist5oclock) && (distleft <=dist8oclock) && (distleft <=dist11oclock))
 	{
 	  direction = 3;
 	}
-     else if((distdown <= distance) && (distdown<=distleft) && (distdown <=distright) && (distdown <=distup)&& (distdown <=dist2oclock) && (distdown <=dist5oclock) && (distdown <=dist8oclock) && (distdown <=dist11oclock))
+     else if((distdown <=distance) && (distdown<=distleft) && (distdown <=distright) && (distdown <=distup)&& (distdown <=dist2oclock) && (distdown <=dist5oclock) && (distdown <=dist8oclock) && (distdown <=dist11oclock))
        {
 	 direction = 2;
        }
-     else if ((distup <= distance) && (distup<=distleft) && (distup <=distdown) && (distup <=distright)&& (distup <=dist2oclock) && (distup <=dist5oclock) && (distup <=dist8oclock) && (distup <=dist11oclock))
+     else if ((distup <=distance) && (distup<=distleft) && (distup <=distdown) && (distup <=distright)&& (distup <=dist2oclock) && (distup <=dist5oclock) && (distup <=dist8oclock) && (distup <=dist11oclock))
        {
 	 direction = 1;
 	}
-	else if ((dist2oclock < distance) && (dist2oclock<distleft) && (dist2oclock <distdown) && (dist2oclock <distright)&& (dist2oclock <distup) && (dist2oclock <dist5oclock) && (dist2oclock <dist8oclock) && (dist2oclock <dist11oclock))
+	else if ((dist2oclock <=distance) && (dist2oclock<=distleft) && (dist2oclock <=distdown) && (dist2oclock <=distright)&& (dist2oclock <=distup) && (dist2oclock <=dist5oclock) && (dist2oclock <=dist8oclock) && (dist2oclock <=dist11oclock))
        {
 	 direction = 5;
 	}
-	else if ((dist5oclock <distance) && (dist5oclock<distleft) && (dist5oclock <distdown) && (dist5oclock <distright)&& (dist5oclock <dist2oclock) && (dist5oclock <distup) && (dist5oclock <dist8oclock) && (dist5oclock <dist11oclock))
+	else if ((dist5oclock <=distance) && (dist5oclock<=distleft) && (dist5oclock <=distdown) && (dist5oclock <=distright)&& (dist5oclock <=dist2oclock) && (dist5oclock <=distup) && (dist5oclock <=dist8oclock) && (dist5oclock <=dist11oclock))
        {
 	 direction = 6;
 	}
-	else if ((dist8oclock < distance) && (dist8oclock<distleft) && (dist8oclock <distdown) && (dist8oclock <distright)&& (dist8oclock <dist2oclock) && (dist8oclock <dist5oclock) && (dist8oclock <distup) && (dist8oclock <dist11oclock))
+	else if ((dist8oclock <=distance) && (dist8oclock<=distleft) && (dist8oclock <=distdown) && (dist8oclock <=distright)&& (dist8oclock <=dist2oclock) && (dist8oclock <=dist5oclock) && (dist8oclock <=distup) && (dist8oclock <=dist11oclock))
        {
 	 direction = 7;
 	}
-	else if ((dist11oclock < distance) && (dist11oclock<distleft) && (dist11oclock <distdown) && (dist11oclock <distright)&& (dist11oclock <dist2oclock) && (dist11oclock <dist5oclock) && (dist11oclock <dist8oclock) && (dist11oclock <distup))
+	else if ((dist11oclock <=distance) && (dist11oclock<=distleft) && (dist11oclock <=distdown) && (dist11oclock <=distright)&& (dist11oclock <=dist2oclock) && (dist11oclock <=dist5oclock) && (dist11oclock <=dist8oclock) && (dist11oclock <=distup))
        {
 	 direction = 8;
 	}
-   //cout << "\ndirection is" << direction << "dist: "<<distance << " distright: "<<distright << " dist2oclock,5oclock"<< dist2oclock<<","<<dist5oclock  ; 
+   //cout << "\ndirection is" << direction << " dist: "<<distance << " xdiff,ydiff:"<<xdiff<<","<<ydiff ; 
    }
  
  switch(direction)
@@ -450,7 +456,7 @@ int direction = 4;
 
 void player::handle_events(SDL_Event &event)
 {
-  int velocity = 25;
+  int velocity = 24;
   
   //If a key was pressed
   if( event.type == SDL_KEYDOWN )
@@ -520,10 +526,12 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
 
   if(isVisible)
     {
-
       if(velocityY > 0)
 	{
-	  if (tackle) status = TDown;	  
+	  if (tackle) status = TDown;
+	    
+	  
+	  
 	  else status = SPRITE_DOWN;
 	  
 	  frame++;
@@ -548,6 +556,7 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
       else if(velocityX < 0)
 	{
         
+
 	  if (tackle) status = TLeft;
 	  else status = SPRITE_LEFT;
 	  frame++;
@@ -566,6 +575,7 @@ void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  wan
       
       if( status == SPRITE_DOWN )
 	{
+
 	  apply_surface(sprite, screen, &states[0][frame] ); 
 	}
       
