@@ -25,55 +25,55 @@ scoreCounter::scoreCounter(std::string filename, int r, int g, int b):Sprite(1),
 
 void scoreCounter::set_clips(){ //sets sprite sheet position clips
     //Clip the sprites
-    states[0][0].x = 287; //0
-    states[0][0].y = 0;
-    states[0][0].w = 21;
-    states[0][0].h = 28;
+    states[0][1].x = 360; //0
+    states[0][1].y = 1530;
+    states[0][1].w = 24;
+    states[0][1].h = 30;
 
-    states[0][1].x = 0; //1
-    states[0][1].y = 0;
-    states[0][1].w = 20;
-    states[0][1].h = 28;
+    states[0][2].x = 384; //1
+    states[0][2].y = 1530;
+    states[0][2].w = 20;
+    states[0][2].h = 30;
 
-    states[0][2].x = 30; //2
-    states[0][2].y = 0;
-    states[0][2].w = 24;
-    states[0][2].h = 28;
+    states[0][3].x = 408; //2
+    states[0][3].y = 1530;
+    states[0][3].w = 24;
+    states[0][3].h = 30;
 
-    states[0][3].x = 62; //3
-    states[0][3].y = 0;
-    states[0][3].w = 23;
-    states[0][3].h = 28;
+    states[0][4].x = 432; //3
+    states[0][4].y = 1530;
+    states[0][4].w = 23;
+    states[0][4].h = 30;
 
-    states[0][4].x = 93; //4
-    states[0][4].y = 0;
-    states[0][4].w = 26;
-    states[0][4].h = 28;
+    states[0][5].x = 456; //4
+    states[0][5].y = 1530;
+    states[0][5].w = 26;
+    states[0][5].h = 30;
 
-    states[0][5].x = 126; //5
-    states[0][5].y = 0;
-    states[0][5].w = 25;
-    states[0][5].h = 28;
+    states[0][6].x = 480; //5
+    states[0][6].y = 1530;
+    states[0][6].w = 25;
+    states[0][6].h = 30;
 
-    states[0][6].x = 157; //6
-    states[0][6].y = 0;
-    states[0][6].w = 26;
-    states[0][6].h = 28;
-
-    states[0][7].x = 189; //7
-    states[0][7].y = 0;
+    states[0][7].x = 504; //6
+    states[0][7].y = 1530;
     states[0][7].w = 26;
-    states[0][7].h = 28;
+    states[0][7].h = 30;
 
-    states[0][8].x = 221; //8
-    states[0][8].y = 0;
+    states[0][8].x = 528; //7
+    states[0][8].y = 1530;
     states[0][8].w = 26;
-    states[0][8].h = 28;
+    states[0][8].h = 30;
 
-    states[0][9].x = 253; //9
-    states[0][9].y = 0;
+    states[0][9].x = 552; //8
+    states[0][9].y = 1530;
     states[0][9].w = 26;
-    states[0][9].h = 28;
+    states[0][9].h = 30;
+
+    states[0][0].x = 576; //9
+    states[0][0].y = 1530;
+    states[0][0].w = 26;
+    states[0][0].h = 30;
 }
 
 int scoreCounter::getOffSetX()

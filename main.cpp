@@ -26,8 +26,8 @@ int main(int argc, char* args[]){
   }
 
   
-  player playerND("player1.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
-  player playerUSC("player1.bmp", 255, 255, 255,0 ,SCREEN_WIDTH/2);
+  player playerND("ND_Player.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
+  player playerUSC("USC_Player.bmp", 255, 255, 255,0 ,SCREEN_WIDTH/2);
   bool tackle = false;
   bool fall = false;
  
@@ -42,7 +42,7 @@ int main(int argc, char* args[]){
     
     playerUSC.counter = 1;
    
-    scoreCounter scoreCount("numbers.bmp",255,255,255);
+    scoreCounter scoreCount("ND_Player.bmp",255,255,255);
     int score = 0;
     
     // Start game

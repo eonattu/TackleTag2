@@ -34,7 +34,7 @@ class player : public Sprite {
 protected:
   bool isVisible; //otter shown on screen
   bool isStarting; //very start of game
-  bool isDead; //whether otter has died
+  bool isDead; 
   
   //states
   const int SPRITE_DOWN;

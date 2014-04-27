@@ -45,13 +45,13 @@ void MenuScreen::set_clips()
     //Clip the sprites
     states[0][0].x = 0; //title
     states[0][0].y = 0;
-    states[0][0].w = 1655;
-    states[0][0].h = 990;
+    states[0][0].w = 1400;
+    states[0][0].h = 800;
 
-    states[0][1].x = 1690; //replay
+    states[0][1].x = 1434; //replay
     states[0][1].y = 0;
-    states[0][1].w = 1655;
-    states[0][1].h = 990;
+    states[0][1].w = 1400;
+    states[0][1].h = 800;
 
 }
 
