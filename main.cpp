@@ -59,8 +59,8 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 		return 1;
 	}
 	 vector<Sprite*> obstacles; // This will hold coins
-  player playerND("player1.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
-  player playerUSC("player1.bmp", 255, 255, 255,0 ,0);
+  player playerND("ND_Player.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
+  player playerUSC("USC_Player.bmp", 255, 255, 255,0 ,0);
   // player playerUSC2("player1.bmp", 255, 255, 255,255 ,0);
   bool tackle = false;
   bool fall = false;
@@ -83,9 +83,18 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
       
     while(quit == false)
       {
+      
+     
      
 	while(start == false)
 	  {
+	         //If the user has Xed out the window
+	  		 if(event.type == SDL_QUIT)
+	     	 {
+				//Quit the program
+				return 1;
+	     	 }
+	
 	  //If music not playing yet
 	  
       if (Mix_PlayingMusic() == 0 && soundCounter==0)
@@ -104,7 +113,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	     
 	    while(SDL_PollEvent(&event))
 	      {
-	    
+	  		
 			start=menu.handle_event(event);
 				if(event.type == SDL_KEYDOWN){
 			   	switch(event.key.keysym.sym){
@@ -126,6 +135,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 			         break; // break once the 's' has been pressed
 			    	}
 			 	}
+	   		
 	      }
 	    
 	    menu.show(screen,false, false);
@@ -149,6 +159,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	    playerND.setStarting(true);
 	    playerUSC.setStarting(true);
 	    //	    	    playerUSC2.setStarting(true);
+	 	 
 	  }
 	
 	// BEGIN GAME
@@ -185,14 +196,14 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	    playerUSC.counter++;
 	   //   playerUSC2.counter++;
 	    playerND.handle_events(event);
-
+			        //If the user has Xed out the window
+	  		 if(event.type == SDL_QUIT)
+	     	 {
+				//Quit the program
+				quit = true;
+	     	 }
 	    	
-	    //If the user has Xed out the window
-	   if(event.type == SDL_QUIT)
-	      {
-		//Quit the program
-		quit = true;
-	      }
+
 	      
 	  }
 	  
@@ -271,8 +282,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	    playerUSC.handle_AIadjust();
 	    //    	   playerUSC2.handle_AIadjust();
 	    playerND.handle_AIadjust();
-
-
+		       
 	  }
 
 
