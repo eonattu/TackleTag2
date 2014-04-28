@@ -1,5 +1,4 @@
 
-
 INSTALLATION:
 	MUST HAVE SDL LIBRARIES INSTALLED
 		-In order to run TackleTag all SDL libraries must be installed
@@ -8,10 +7,11 @@ INSTALLATION:
 	          command in the project repository.
 		
 ENVIRONMENTS:
-	TackleTag was built in the Linux Red Hat Environment, it should intheory be able to run on 	any machine which has the SDL libraries installed, but all environments could not be tested. 	Performance on other platforms cannot be guaranteed.
+	TackleTag was built in the Linux Red Hat Environment, it should in theory be able to run on any machine which has the SDL libraries installed, but all environments have not be tested. Performance on other platforms cannot be guaranteed.
 	
 INSTRUCTIONS:
 	-Run main
+	-Stop title screen music by pressing 's'
 	-Press ‘space’ to begin. Avoid the USC Player by moving using the arrow keys and rack up 	 points.
 	-Collect coins for extra points
 	-Hit ‘space’ to play again
