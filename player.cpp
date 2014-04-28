@@ -11,7 +11,7 @@ player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(8
 {
     //Initialize sprite dimensions
     height = 120;
-    width = 120;
+    width = 100;
 
     //Initialize movement variables
     offSetY = x;
@@ -365,7 +365,7 @@ double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
 double velocity = counter;
 if (velocity>20)
 {
-velocity=19+(.005*(double)counter);
+velocity=19+(.01*(double)counter);
 }
 double distright = sqrt(pow((xdiff+velocity),2) + pow(ydiff,2));
 double distleft = sqrt(pow((xdiff-velocity),2) + pow(ydiff,2));
@@ -378,7 +378,7 @@ double dist8oclock =sqrt(pow((xdiff-velocity),2)+pow((ydiff+velocity),2));
 double dist11oclock = sqrt(pow((xdiff-velocity),2)+pow((ydiff-velocity),2));
 
 int direction = 4;
-cout << "\nvelocity: " << velocity;
+cout << "userx,usery: " << userx << "," << usery<< "compX,compY:"<< offSetX<<","<< offSetY<<endl;
  if ((counter % 20) ==1) 
    {	
      direction = (rand() % 8 +1); // does random move
@@ -509,16 +509,8 @@ void player::move()
     {
       offSetY -= velocityY;
     }
+    cout << "\nmove X,y:"<< offSetX <<","<<offSetY<<endl;
 }
-
-
-
-
-
-
-
-
-
 
 
 void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  want it to be able to tackle, forced a false
