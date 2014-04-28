@@ -1,7 +1,7 @@
 all: main
 
 main: main.o background.o Timer.o sprite.o player.o scoreCounter.o menuScreen.o
-	g++ main.o Timer.o background.o sprite.o player.o scoreCounter.o menuScreen.o -lSDL -lSDL_image -o main
+	g++ main.o Timer.o background.o sprite.o player.o scoreCounter.o menuScreen.o -lSDL -lSDL_image -lSDL_mixer -o main
 
 main.o: main.cpp
 	g++ -c main.cpp
