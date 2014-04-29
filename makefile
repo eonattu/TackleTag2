@@ -1,7 +1,7 @@
 all: main
 
-main: main.o background.o Timer.o sprite.o player.o scoreCounter.o menuScreen.o coin.o
-	g++ main.o Timer.o background.o sprite.o player.o scoreCounter.o menuScreen.o coin.o -lSDL -lSDL_image -lSDL_mixer -o main
+main: main.o background.o Timer.o sprite.o player.o scoreCounter.o menuScreen.o obstacle.o coin.o
+	g++ main.o Timer.o background.o sprite.o player.o obstacle.o scoreCounter.o menuScreen.o coin.o -lSDL -lSDL_image -lSDL_mixer -o main
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -18,6 +18,9 @@ sprite.o: sprite.cpp
 player.o: player.cpp
 	g++ -c player.cpp
 
+obstacle.o: obstacle.cpp
+	g++ -c obstacle.cpp
+	
 scoreCounter.o: scoreCounter.cpp
 	g++ -c scoreCounter.cpp
 
