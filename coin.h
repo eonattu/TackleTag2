@@ -1,4 +1,6 @@
-
+// Taylor Seale, Iheanyi Ekechukwu, Ryan Shea, Andrew Caron
+// Fundamentals of Computing II: Final Project
+// coin.h: This is the header file for the coin class which controls the coin obstacles
 
 #include "SDL/SDL.h"
 #include "sprite.h"
@@ -11,9 +13,9 @@
 class Coin: public Sprite{
 
  public:
-  Coin(std::string,int,int,int,int, int); //constructor // last two are x and y position
+  Coin(std::string,int,int,int,int); //constructor
   virtual void move(); //moves coin across screen
-  virtual void show(SDL_Surface *, bool, bool); //displays proper sprite to screen
+  virtual void show(SDL_Surface *); //displays proper sprite to screen
   virtual void set_clips(); //sets sprite sheet clip positions
   virtual int getOffSetX(); //returns x position
   virtual int getOffSetY(); //returns y position
