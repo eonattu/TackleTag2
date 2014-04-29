@@ -325,13 +325,20 @@ int main(int argc, char* args[]){
 	    playerUSC.counter = 1;
 	    playerUSC.setOffSetX(0);
 	    playerUSC.setOffSetY(0);
-	    
 	    playerUSC.handle_AIadjust();
 	    playerND.handle_AIadjust();
-	    
+
+
+	    for(int j=0; j<obstacles.size(); j++)
+	      { //deletes all obstacles
+		delete obstacles.at(j);
+		obstacles.erase(obstacles.begin()+j);
+		j--;
+		
+		
+	      }
+	
 	  }
-	
-	
 	
 	
       }
