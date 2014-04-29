@@ -14,24 +14,26 @@
 
 
 int main(int argc, char* args[]){
+  
+  // Music to be played
+  Mix_Music *titlemusic = NULL;
+  Mix_Chunk *practicesound = NULL;
+  Mix_Chunk *crowd = NULL;
+  Mix_Chunk *crazytrain = NULL;
+  Mix_Chunk *boom = NULL;
+  Mix_Chunk *hit = NULL;
+  // Sound Effects to be played
+  
+  //cout << "STILL HERE" << endl;
 
-// Music to be played
-Mix_Music *titlemusic = NULL;
-Mix_Chunk *practicesound = NULL;
-Mix_Chunk *crowd = NULL;
-Mix_Chunk *crazytrain = NULL;
-Mix_Chunk *boom = NULL;
-Mix_Chunk *hit = NULL;
-// Sound Effects to be played
-
-//Initialize SDL_mixer
-if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
-	{
-		return 1;
-	}
+  //Initialize SDL_mixer
+  if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+    {
+      return 1;
+    }
   srand (time(NULL));
   		
-    //Quit flag
+  //Quit flag
   bool quit = false;
   bool start = false;
   
@@ -39,108 +41,117 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
   if(init() == false){
     return 1;
   }
+  
+  //cout << "STILL HERE" << endl;
 
-//Loading the music
-	titlemusic = Mix_LoadMUS("Title1.wav");
-	practicesound = Mix_LoadWAV("practice1.wav");
-	crowd = Mix_LoadWAV("crowd1.wav");
-	crazytrain = Mix_LoadWAV("crazytrain1.wav");
-	boom = Mix_LoadWAV("boom.wav");
-	hit = Mix_LoadWAV("hit1.wav");
-	//If there was a problem loading the sound effects
-	if( ( practicesound == NULL ) || ( crazytrain == NULL )||( crowd == NULL ) || (boom==NULL)|| (hit==NULL)) 
-	{ 
-	return 1; 
-	} 
+
+
+  //Loading the music
+  titlemusic = Mix_LoadMUS("Title1.wav");
+  practicesound = Mix_LoadWAV("practice1.wav");
+  crowd = Mix_LoadWAV("crowd1.wav");
+  crazytrain = Mix_LoadWAV("crazytrain1.wav");
+  boom = Mix_LoadWAV("boom.wav");
+  hit = Mix_LoadWAV("hit1.wav");
+  //If there was a problem loading the sound effects
+  if( ( practicesound == NULL ) || ( crazytrain == NULL )||( crowd == NULL ) || (boom==NULL)|| (hit==NULL)) 
+    { 
+      return 1; 
+    } 
+  
+  // If there was a problem loading the music
+  if (titlemusic == NULL)
+    {
+      return 1;
+    }
+
+
+
 	
-// If there was a problem loading the music
-	if (titlemusic == NULL)
-	{
-		return 1;
-	}
-	 vector<Sprite*> obstacles; // This will hold coins
+  vector<Sprite*> obstacles; // This will hold coins
   player playerND("ND_Player.bmp", 255, 255, 255, SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
   player playerUSC("USC_Player.bmp", 255, 255, 255,0 ,0);
   // player playerUSC2("player1.bmp", 255, 255, 255,255 ,0);
   bool tackle = false;
   bool fall = false;
- 
+  
   //The frame rate regulator
   Timer fps;
   
   //The background
-    Background background("background.bmp",screen);
-    background.show(screen);
-
-    MenuScreen menu("Welcome.bmp", 255,255,0);
-    
+  Background background("background.bmp",screen);
+  background.show(screen);
+  
+  MenuScreen menu("Welcome.bmp", 255,255,0);
+  
     playerUSC.counter = 1;
     //     playerUSC2.counter = 1;
     scoreCounter scoreCount("ND_Player.bmp",255,255,255);
     int score = 0;
     int soundCounter = 0;
     // Start game
-      
+    
+
     while(quit == false)
       {
-      
-     
-     
+	
+	
+	
 	while(start == false)
 	  {
-	         //If the user has Xed out the window
-	  		 if(event.type == SDL_QUIT)
-	     	 {
-				//Quit the program
-				return 1;
-	     	 }
+	    //If the user has Xed out the window
+	    if(event.type == SDL_QUIT)
+	      {
+		//Quit the program
+		return 1;
+	      }
 	
-	  //If music not playing yet
-	  
-      if (Mix_PlayingMusic() == 0 && soundCounter==0)
-      {
-      	//Play music
-      	if(Mix_PlayMusic(titlemusic,-1) == -1)
-      	{
-      		return 1;
+	    //If music not playing yet
+	    
+	    if (Mix_PlayingMusic() == 0 && soundCounter==0)
+	      {
+		//Play music
+		if(Mix_PlayMusic(titlemusic,-1) == -1)
+		  {
+		    return 1;
       	}
-      	
-      }
-       soundCounter++;
+		
+	      }
+	    soundCounter++;
 	    Timer mps;
 	    mps.start();
 	    scoreCount.setTitle(false);
-	     
+	    
 	    while(SDL_PollEvent(&event))
 	      {
-	  		
-			start=menu.handle_event(event);
-				if(event.type == SDL_KEYDOWN){
-			   	switch(event.key.keysym.sym){
-			      	case SDLK_s:
-			      	{
-			      		//If the music is paused
+		
+		start=menu.handle_event(event);
+		if(event.type == SDL_KEYDOWN){
+		  switch(event.key.keysym.sym){
+		  case SDLK_s:
+		    {
+		      //If the music is paused
 			      		 if( Mix_PausedMusic() == 1 ) 
-			      		 { 
-			      		 //Resume the music 
-			      		 Mix_ResumeMusic(); 
-			      		 } 
+					   { 
+					     //Resume the music 
+					     Mix_ResumeMusic(); 
+					   } 
 			      		 //If the music is playing 
 			      		 else 
-			      		 { 
-			      		 //Pause the music 
-			      		 Mix_PauseMusic(); 
+					   { 
+					     //Pause the music 
+					     Mix_PauseMusic(); 
 			      		 }
-			      	}
-			         break; // break once the 's' has been pressed
-			    	}
-			 	}
-	   		
+		    }
+		    break; // break once the 's' has been pressed
+		  }
+		}
+	   	
 	      }
 	    
 	    menu.show(screen,false, false);
 	    SDL_Flip(screen);
-	   
+	    
 	    
 	    if (mps.get_ticks() < 1000/ FRAMES_PER_SECOND)
 	      {
@@ -159,48 +170,50 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	    playerND.setStarting(true);
 	    playerUSC.setStarting(true);
 	    //	    	    playerUSC2.setStarting(true);
-	 	 
+	    
 	  }
 	
 	// BEGIN GAME
-		
+	
 	Mix_HaltMusic();
-
+	
 	scoreCount.setTitle(true);
 	menu.setHasPlayed(true);
 	fps.start();
 	
 	//If score is '10' ie. game just started 
-	  if( score ==0 ) { 
-	  		 Mix_HaltChannel( 4);
+	if( score ==0 ) { 
+	  Mix_HaltChannel( 4);
 	  		//Play the crowd and practice sound effect 
-	  		if( Mix_PlayChannel( 1, practicesound, 1 ) == -1 ) 
+	  if( Mix_PlayChannel( 1, practicesound, 1 ) == -1 ) 
 	  		{ 
-	  				return 1; 
+			  return 1; 
 	  		} 
-	  		if( Mix_PlayChannel( 2, crowd, 1 ) == -1 ) 
-	  		{ 
-	  				return 1; 
-	  		} 
-	  			if( Mix_PlayChannel( 3, crazytrain, 1 ) == -1 ) 
-	  		{ 
-	  				return 1; 
-	  		} 
-	  }
-	  
+	  if( Mix_PlayChannel( 2, crowd, 1 ) == -1 ) 
+	    { 
+	      return 1; 
+	    } 
+	  if( Mix_PlayChannel( 3, crazytrain, 1 ) == -1 ) 
+	    { 
+	      return 1; 
+	    } 
+	}
+	
 	//While there's events to handle
         while(SDL_PollEvent(&event))
 	  {
-
-
+	    
+	    
 	    playerUSC.counter++;
-	   //   playerUSC2.counter++;
+	    //   playerUSC2.counter++;
 	    playerND.handle_events(event);
-			        //If the user has Xed out the window
-	  		 if(event.type == SDL_QUIT)
-	     	 {
-				//Quit the program
-				quit = true;
+	    //If the user has Xed out the window
+	    
+
+	    if(event.type == SDL_QUIT)
+	      {
+		//Quit the program
+		quit = true;
 	     	 }
 	    	
 
