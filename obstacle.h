@@ -17,6 +17,7 @@ class obstacle : public Sprite {
   virtual int getOffSetX(); //returns x position coordinate
   virtual int getOffSetY(); //returns y position coordinate 
   virtual int collision(); //handles collision
+  virtual int collisioncheck(int,int,int);
   void setOffSetY(int); 
   void setOffSetX(int);
     void setStarting(bool); 
