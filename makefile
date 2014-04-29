@@ -1,7 +1,7 @@
 all: main
 
-main: main.o background.o Timer.o sprite.o player.o scoreCounter.o menuScreen.o
-	g++ main.o Timer.o background.o sprite.o player.o scoreCounter.o menuScreen.o -lSDL -lSDL_image -lSDL_mixer -o main
+main: main.o background.o Timer.o sprite.o player.o scoreCounter.o menuScreen.o coin.o
+	g++ main.o Timer.o background.o sprite.o player.o scoreCounter.o menuScreen.o coin.o -lSDL -lSDL_image -lSDL_mixer -o main
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -23,6 +23,9 @@ scoreCounter.o: scoreCounter.cpp
 
 menuScreen.o: menuScreen.cpp
 	g++ -c menuScreen.cpp
+
+coin.o: coin.cpp
+	g++ -c coin.cpp
 
 clean: 
 	rm -f *.o main

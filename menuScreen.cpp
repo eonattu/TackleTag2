@@ -69,6 +69,8 @@ bool MenuScreen::handle_event(SDL_Event &event)
 
 int MenuScreen::collision(){} //virtual function from inheritance
 
+int MenuScreen::collisioncheck(int,int,int){}
+
 void MenuScreen::move(){} //virtual function from inheritance
 
 void MenuScreen::show(SDL_Surface *screen, bool, bool)

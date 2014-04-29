@@ -150,3 +150,5 @@ void scoreCounter::show(SDL_Surface *screen, bool, bool)
     xPos += 28;
   }
 }
+
+int scoreCounter::collisioncheck(int,int,int){}

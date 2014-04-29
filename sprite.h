@@ -21,7 +21,7 @@ class Sprite
   SDL_Surface * load_image(std::string,int,int,int); //takes in image of sprite
   virtual int getOffSetX()=0; //returns x position coordinate
   virtual int getOffSetY()=0; //returns y position coordinate
-  
+  virtual int collisioncheck(int,int,int)=0;
   int frame; // determines which frame of the sprite sheet should be displayed
   bool getHasCollided(); //returns whether object has collided with another
   SDL_Surface * sprite; //sprite surface

@@ -21,7 +21,7 @@ class player : public Sprite {
   void handle_AI(int,int);
   void handle_AIadjust();
   int counter;
-  int collisioncheck(int,int,int); //checks for collision between player and an obstacle
+  virtual int collisioncheck(int,int,int); //checks for collision between player and an obstacle
   void setIsVisible(bool); 
   int getStatus();
   void setOffSetY(int); 

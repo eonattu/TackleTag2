@@ -1,7 +1,4 @@
-// Taylor Seale, Iheanyi Ekechukwu, Ryan Shea, Andrew Caron
-// Fundamentals of Computing II: Final Project
-// coin.cpp: This is the implemenation file for the coin class which controls the coin obstacles
-
+#include<cmath>
 #include "sprite.h"
 #include "coin.h"
 #include "SDL/SDL.h"
@@ -9,15 +6,15 @@
 #include <string>
 #include <iostream>
 
-Coin::Coin(std::string filename, int r, int g, int b,int randX):Sprite(2), SPIN(0), SCORE(1){
+Coin::Coin(std::string filename, int r, int g, int b,int randX,int randY):Sprite(2), SPIN(0), SCORE(1){
 
     hasCollided = false;
   
     //Initialize movement variables
-    offSetY = -50;
+    offSetY = randY;
     offSetX = randX;
     velocityX = 0;
-    velocityY = 7;
+    velocityY = 0;
 
     //Initialize animation variables
     frame = 0;
@@ -103,27 +100,17 @@ void Coin::set_clips(){ //sets clip location for sprite sheets
 }
 
 int Coin::collision(){ //if a collision has happened with a coin
-	velocityY=0; //keep at same height
-	status = SCORE; //switch to show score sprites instead of coin
-	hasCollided = true; //set collided to true
-	return 2; //collision was with a coin
+
+  status = SCORE; //switch to show score sprites instead of coin
+  hasCollided = true; //set collided to true
+  return 2; //collision was with a coin
 }
 
 
-void Coin::move(){ //moves the coin across the screen
-    // increase the offSet based on the value of the velocity (up or down)
-	if (offSetY < 298){ //if not at bottom of screen
-    	offSetY += velocityY;
-	}else{ //at bottom of screen
-		velocityY = 0; 
-	}
-	if (offSetY > 50){ //if coin is within the water
-		velocityX = -10;
-		offSetX += velocityX;
-	}
-}
+void Coin::move(){}
 
-void Coin::show(SDL_Surface *screen){ //rotates between sprite images to show animation
+
+void Coin::show(SDL_Surface *screen,bool,bool){ //rotates between sprite images to show animation
 	if (status == SCORE){
 		frame=0;
 		apply_surface(sprite, screen, &states[1][frame]); //display score sprite
@@ -136,4 +123,15 @@ void Coin::show(SDL_Surface *screen){ //rotates between sprite images to show an
 		}
 		apply_surface(sprite, screen, &states[0][frame]); //display sprite
 	}
+}
+
+int Coin::collisioncheck(int computerX, int computerY, int sensitivity)
+{
+    double xdiff = (double)computerX - (double)offSetX;
+    double ydiff =  (double)computerY - (double)offSetY;
+    double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
+
+    if (distance <= sensitivity) return 1;
+    else return 0;
+
 }
