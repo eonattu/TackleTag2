@@ -77,3 +77,4 @@ void obstacle::show(SDL_Surface *screen,bool tackle,bool fall)
 	  }
 
 }
+int obstacle::collisioncheck(int,int,int){}
