@@ -17,7 +17,9 @@ class MenuScreen : public Sprite{
   	virtual int getOffSetY(); //returns y position of center
 	virtual int collision(int,int,int); //virtual function from inheritance
 	virtual int collisioncheck(int,int,int);
-
+	virtual int getwidth();
+  	virtual int getheight();
+  	void free();
 	bool handle_event(SDL_Event &); //detects events such as spacebar press
 	void setHasPlayed(bool); //sets hasPlayed variable
 	bool getHasPlayed(); //returns hasPlayed variable

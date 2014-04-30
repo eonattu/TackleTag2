@@ -34,7 +34,12 @@ int Coin::getOffSetX(){ //returns x position
 int Coin::getOffSetY(){ //returns y position
 	return offSetY;
 }
-
+int Coin::getwidth(){ //returns width position
+	return 15;
+}
+int Coin::getheight(){ //returns height position
+	return 16;
+}
 void Coin::set_clips(){ //sets clip location for sprite sheets
     //Clip the sprites
     states[0][0].x = 6; //spin0
@@ -135,5 +140,11 @@ int Coin::collisioncheck(int computerX, int computerY, int sensitivity)
 
     if (distance <= sensitivity) return 1;
     else return 0;
+
+}
+void Coin::free()
+{
+
+	  freesurface(sprite); 
 
 }

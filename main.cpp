@@ -67,7 +67,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	}
 	
 	
-  vector<Sprite*> obstacles; // This will hold coins
+
   player playerND("ND_Player.bmp", 255, 255, 255, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
   player playerUSC("USC_Player.bmp", 255, 255, 255,0 ,0);
   //obstacle cone("cone.bmp",255,255,255,(rand()%SCREEN_WIDTH),(rand()%SCREEN_HEIGHT));
@@ -79,7 +79,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
   Timer fps;
   
   //The background
-  Background background("background.bmp",screen);
+  Background background("Field.bmp",screen);
   background.show(screen);
 
   MenuScreen menu("Welcome.bmp", 255,255,0);
@@ -90,20 +90,36 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
     int score = 0;
     int soundCounter = 0;
     
-
+        vector<Sprite*> obstacles; // This will hold coins
 
     // Start game
       
     while(quit == false)
       {
-      
-     
+
      
 	while(start == false)
 	  {
 	         //If the user has Xed out the window
 	  		 if(event.type == SDL_QUIT)
 	     	 {
+	     	 //Clean up
+			 //Free the sound effects 
+			 menu.free();
+			 playerND.free();
+			 playerUSC.free();
+			 scoreCount.free();
+			 background.free();
+			 Mix_FreeChunk( practicesound ); 
+			 Mix_FreeChunk( crowd ); 
+			 Mix_FreeChunk( boom ); 
+			 Mix_FreeChunk( crazytrain );
+			 Mix_FreeChunk( coin );
+			 Mix_FreeMusic( titlemusic );
+			 Mix_CloseAudio(); 
+			 
+			 SDL_Quit();
+	     	 
 				//Quit the program
 				return 1;
 	     	 }
@@ -202,6 +218,8 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	  		{ 
 	  				return 1; 
 	  		} 
+	  				
+
 	  }
 	  
 	//While there's events to handle
@@ -223,11 +241,33 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	      
 	  }
 	  
+	  if (score==1 ) {
+			
+				for (int j=3; j<=14;j++)
+				{
+
+					//for ( int k=2; k<=12;k++)
+					//{
+						//if (j%5==0 && k%2==0)
+						//{
+						//cout << "\nJis,Kis:"<<j<<","<<k;
+						
+						obstacle* cone = new obstacle("cone.bmp",255,255,255, rand()%(SCREEN_WIDTH-400)+200, j*40);
+
+						obstacles.push_back(cone);
+						//cout << "\nsize is: "<<obstacles.size();
+						//}
+					//}
+				}
+
+			//cout << "here1asdfasdfasdfasdfasdfasdfasdfasdfasdf\n" << endl;
+		}
+	  
 	  	int spawnCoin = rand()%1000 + 1;
-		if(spawnCoin < 35)
+		if(spawnCoin < 150)
 			{
-				int randX= rand()%1000 + 200;
-				int randY= rand()%400 + 200;
+				int randX= rand()%1000 + 100;
+				int randY= rand()%700 + 100;
 
 				Coin* money = new Coin("coins.bmp", 48,120,128, randX, randY);
 				obstacles.push_back(money);
@@ -236,23 +276,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 			//cout << "here1asdfasdfasdfasdfasdfasdfasdfasdfasdf\n" << endl;
 		}	
 		
-		if (score >=7 && score <=28) {
-			
-					int randX= rand()%(SCREEN_WIDTH-300) + 300;
-					if (randX ==SCREEN_WIDTH/2) randX== (SCREEN_WIDTH/2-100);
-				int j=2;
-				for ( j=2; j<=12;j++)
-				{
-					if (j%5==0)
-					{
-					obstacle* cone = new obstacle("cone.bmp",255,255,255, randX, j*40);
-					//obstacle* cone2 = new obstacle("cone.bmp",255,255,255, randX, (SCREEN_HEIGHT-SCREEN_HEIGHT/j));
-					obstacles.push_back(cone);
-					}
-				}
 
-			//cout << "here1asdfasdfasdfasdfasdfasdfasdfasdfasdf\n" << endl;
-		}
 			
 
 
@@ -263,8 +287,8 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	//	playerUSC2.handle_AIadjust();
 	playerUSC.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
 	//	playerUSC2.handle_AI(playerND.getOffSetX(),playerND.getOffSetY());
-	tackle = playerUSC.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 120);
-	fall = playerUSC.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),60);
+	tackle = playerUSC.collisioncheck(playerND.getOffSetX()+(playerND.getwidth()/2),playerND.getOffSetY()+(playerND.getheight()/2), 90);
+	fall = playerUSC.collisioncheck(playerND.getOffSetX()+(playerND.getwidth()/2), playerND.getOffSetY()+(playerND.getheight()/2),60);
 	
 	//	tackle = playerUSC2.collisioncheck(playerND.getOffSetX(),playerND.getOffSetY(), 120);
 	// fall = playerUSC2.collisioncheck(playerND.getOffSetX(), playerND.getOffSetY(),60);
@@ -281,8 +305,8 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 				
 		for(int i=0; i<obstacles.size(); i++)
 		{ 
-		int collide = playerND.collisioncheck(obstacles.at(i)->getOffSetX(), obstacles.at(i)->getOffSetY(), 60);
-		int collideUSC = playerUSC.collisioncheck(obstacles.at(i)->getOffSetX(), obstacles.at(i)->getOffSetY(), 60);
+		int collide = playerND.collisioncheck(obstacles.at(i)->getOffSetX()+(obstacles.at(i)->getwidth())/2, obstacles.at(i)->getOffSetY()+(obstacles.at(i)->getheight())/2, 40);
+		int collideUSC = playerUSC.collisioncheck(obstacles.at(i)->getOffSetX()+(obstacles.at(i)->getwidth())/2, obstacles.at(i)->getOffSetY()+(obstacles.at(i)->getheight())/2, 40);
 			if(collide == 1 || collideUSC ==1)
 
 			{
@@ -292,7 +316,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 				if (scoreupND ==2)
 				{
 				score = score + 100;
-				Mix_PlayChannel(-1,coin,0);
+				Mix_PlayChannel(7,coin,0);
 				collide = 0;
 				
 				}
@@ -309,21 +333,22 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 		}
       	//playerUSC2.move(); 
 	    
-	score += 7;
+	score += 1;
 	scoreCount.setScore(score);
 
 	//scoreCount.show(screen, false, false);
 	background.show(screen);
-	for(int i = 0; i<obstacles.size(); i++)
-		{
-			obstacles.at(i)->show(screen, false, false);
-		}
+
 		
 	playerND.show(screen, false, fall); // nd will never tackle
 	playerUSC.show(screen, tackle, false); // usc will never fall
 	//cone.show(screen, tackle,fall);
 	//	playerUSC2.show(screen, tackle, false); // usc will never fall
 	scoreCount.show(screen, false, false);
+		for(int i = 0; i<obstacles.size(); i++)
+		{
+			obstacles.at(i)->show(screen, false, false);
+		}
 	playerUSC.handle_AIadjust();
 
 
@@ -343,13 +368,15 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	for(int i =0; i < obstacles.size(); i++)
 		{
 			if (obstacles.at(i)->getHasCollided())
-			{
+			{	
+				obstacles.at(i)->free();
 				delete obstacles.at(i);
 				obstacles.erase(obstacles.begin()+i);
 				i--;
 			}
 
 		}
+					//cout <<"\nsize is after coins removed: "<< obstacles.size();
        
 	
 	if(fall == true)
@@ -369,7 +396,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	    tackle = false;
 	    fall = false;
 	    playerND.setOffSetX(SCREEN_WIDTH/2);
-	    playerND.setOffSetY(SCREEN_HEIGHT/2);
+	    playerND.setOffSetY(SCREEN_HEIGHT-140);
 	    //cone.setOffSetX(rand()%SCREEN_WIDTH);
 	    //cone.setOffSetY(rand()%SCREEN_HEIGHT);
 		 playerUSC.counter = 1;
@@ -381,32 +408,25 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 	    playerUSC.handle_AIadjust();
 	    //    	   playerUSC2.handle_AIadjust();
 	    playerND.handle_AIadjust();
+			//cout <<"\nsize is after: "<< obstacles.size();
 			for(int j=0; j<obstacles.size(); j++)
 				{ //deletes all obstacles
+					obstacles.at(j)->free();
 					delete obstacles.at(j);
 					obstacles.erase(obstacles.begin()+j);
 					j--;
 
 
-				}       
-	  
+				}   
+			
+	          //vector<Sprite*> obstacles; // This will hold coins
 	  }
 
 
 
 		
     }
-    //Clean up
-    //Free the sound effects 
-    Mix_FreeChunk( practicesound ); 
-    Mix_FreeChunk( crowd ); 
-    Mix_FreeChunk( boom ); 
-    Mix_FreeChunk( crazytrain );
-    Mix_FreeChunk( coin );
-    Mix_FreeMusic( titlemusic );
-    Mix_CloseAudio(); 
     
-    SDL_Quit();
     
     return 0;
     

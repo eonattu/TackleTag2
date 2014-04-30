@@ -22,6 +22,9 @@ class Sprite
   virtual int getOffSetX()=0; //returns x position coordinate
   virtual int getOffSetY()=0; //returns y position coordinate
   virtual int collisioncheck(int,int,int)=0;
+  virtual int getwidth()=0;
+  virtual int getheight()=0;
+  void freesurface(SDL_Surface*);
   int frame; // determines which frame of the sprite sheet should be displayed
   bool getHasCollided(); //returns whether object has collided with another
   SDL_Surface * sprite; //sprite surface

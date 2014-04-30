@@ -48,5 +48,9 @@ SDL_Surface * Sprite::load_image(std::string filename, int r, int g, int b)
     return optimizedImage;
     //return loadedImage;
 }
+void Sprite::freesurface()
+{
+	SDL_FreeSurface(Sprite);
+}
 
  

@@ -35,6 +35,8 @@ int MenuScreen::getOffSetX(){ //returns x position
 int MenuScreen::getOffSetY(){ //returns y position
 	return offSetY;
 }
+int MenuScreen::getwidth(){return 1;}
+int MenuScreen::getheight(){return 1;}
 
 bool MenuScreen::getHasPlayed(){return hasPlayed;} 
 
@@ -45,13 +47,13 @@ void MenuScreen::set_clips()
     //Clip the sprites
     states[0][0].x = 0; //title
     states[0][0].y = 0;
-    states[0][0].w = 1400;
-    states[0][0].h = 800;
+    states[0][0].w = 1100;
+    states[0][0].h = 840;
 
-    states[0][1].x = 1434; //replay
+    states[0][1].x = 1130; //replay
     states[0][1].y = 0;
-    states[0][1].w = 1400;
-    states[0][1].h = 800;
+    states[0][1].w = 1100;
+    states[0][1].h = 840;
 
 }
 
@@ -86,4 +88,10 @@ void MenuScreen::show(SDL_Surface *screen, bool, bool)
 	  }
 
 	apply_surface(sprite, screen, &states[0][frame]);
+}
+void MenuScreen::free()
+{
+
+	  freesurface(sprite); 
+
 }

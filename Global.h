@@ -10,11 +10,11 @@
 #include <iostream>
 
 //variables
-const int SCREEN_WIDTH = 1400;
-const int SCREEN_HEIGHT = 800;
+const int SCREEN_WIDTH = 1100;
+const int SCREEN_HEIGHT = 840;
 const int SCREEN_BPP = 32;
 
-const int FRAMES_PER_SECOND = 10;
+const int FRAMES_PER_SECOND = 12;
 SDL_Event event;
 SDL_Surface *screen = NULL;
 

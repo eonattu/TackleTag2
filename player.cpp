@@ -344,15 +344,20 @@ void player::setIsVisible(bool vis){isVisible = vis;}
 
 int player::collisioncheck(int computerX, int computerY, int sensitivity)
 {
-    double xdiff = (double)computerX - ((double)offSetX);
-    double ydiff =  (double)computerY - ((double)offSetY);
+    double xdiff = (double)computerX - ((double)offSetX+width/2);
+    double ydiff =  (double)computerY - ((double)offSetY+height/2);
     double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
 
     if (distance <= sensitivity) return 1;
     else return 0;
 
 }
-
+int player::getwidth(){ //returns width position
+	return width;
+}
+int player::getheight(){ //returns height position
+	return height;
+}
 void player::handle_AI(int userx, int usery)
 {
 double xdiff = (double)offSetX - (double)userx;
@@ -363,9 +368,9 @@ double ydiff = (double)offSetY - (double)usery;
 double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
 
 double velocity = counter;
-if (velocity>20)
+if (velocity>15)
 {
-velocity=19+(.01*(double)counter);
+velocity=15+(.005*(double)counter);
 }
 double distright = sqrt(pow((xdiff+velocity),2) + pow(ydiff,2));
 double distleft = sqrt(pow((xdiff-velocity),2) + pow(ydiff,2));
@@ -456,7 +461,7 @@ int direction = 4;
 
 void player::handle_events(SDL_Event &event)
 {
-  int velocity = 24;
+  int velocity = 22;
   
   //If a key was pressed
   if( event.type == SDL_KEYDOWN )
@@ -504,13 +509,13 @@ void player::move(int obstaclex,int obstacley, int type)
   
 
   offSetY += velocityY;
-  if( (offSetX < 0) || ( offSetX + width > SCREEN_WIDTH ) )
+  if( (offSetX < 0) || ( offSetX + width > SCREEN_WIDTH-300 ) )
     {
       offSetX -= velocityX;
     }  
   
   // Check boundary conditions
-  if( ( offSetY < 0 ) || ( offSetY + height > SCREEN_HEIGHT ) )
+  if( ( offSetY < 0 ) || ( offSetY + height > SCREEN_HEIGHT+40 ) )
     {
       offSetY -= velocityY;
     }
@@ -519,11 +524,11 @@ void player::move(int obstaclex,int obstacley, int type)
   {
    //cout << "\noffsetx,y post : "<< offSetX<<","<<offSetY;
    //cout << "\nobstaclex,obstacley: "<< obstaclex<<","<<obstacley;
-  	if (offSetX < obstaclex || offSetX > obstaclex-50) 
+  	if (offSetX < obstaclex || offSetX > obstaclex) 
   	{
   	offSetX -=velocityX;
   	}
-   if (offSetY >obstacley-70 || offSetY < obstacley)
+   if (offSetY >obstacley || offSetY < obstacley)
    {
     offSetY -=velocityY; 
   	}
@@ -531,17 +536,52 @@ void player::move(int obstaclex,int obstacley, int type)
   
   else if (type==3)
   {
-	  	if (offSetX < obstaclex || offSetX > obstaclex-30) 
+  /*
+	  	if ((offSetX+width) >= obstaclex || (offSetX) <= (obstaclex+50)) 
 	  	{
+	  	//cout << "apples";
 	  	offSetX -=velocityX;
-		velocityY = 40;
+	  	if ((counter % 20) ==1) 
+   	{	
+     velocityY =-10; // does random move
+   	}
+		//velocityY =-10;
+		offSetY +=15;
+	  	}
+	  	//if((offSetX) >=(obstaclex-50) && offSetX <=(obstaclex)) offSetX -=velocityX;
+		if ((offSetY+height) > obstacley || (offSetY) <= (obstacley+70))
+		{
+		//cout << "gorrillas";
+		 offSetY -=velocityY;
+		 	if ((counter % 20) ==1) 
+				{	
+			  velocityX =-10; // does random move
+				}
+		 		offSetX +=15;
 
 	  	}
-		if (offSetY >obstacley-30 || offSetY < obstacley)
-		{
-		 offSetY -=velocityY;
-		velocityX = 40;
-	  	}
+	  	//else if((offSetY) >=(obstacley-70) && offSetY <=(obstacley)) offSetX -=velocityY;
+  	*/
+  	
+  	//cout << "\noffsetx,y post : "<< offSetX<<","<<offSetY;
+   //cout << "\nobstaclex,obstacley: "<< obstaclex<<","<<obstacley;
+  	if (offSetX < obstaclex || offSetX > obstaclex) 
+  	{
+  	offSetX -=velocityX;
+  	velocityX = 0;
+  	offSetY += 5;
+  	  	//velocityX = 20;
+  	velocityY = +10;
+  	}
+   if (offSetY >obstacley || offSetY < obstacley)
+   {
+   
+   offSetX +=5;
+    offSetY -=velocityY;
+    velocityY=0;
+    velocityX = +10; 
+    //velocityY = 20;
+  	}
   }
     //cout << "\nmove X,y:"<< offSetX <<","<<offSetY<<endl;
 }
@@ -657,4 +697,11 @@ void player:: setStatus(int num)
 void player:: setFrame(int num)
 {
   frame = num;
+}
+
+void player::free()
+{
+
+	  freesurface(sprite); 
+
 }

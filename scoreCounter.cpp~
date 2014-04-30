@@ -23,6 +23,9 @@ scoreCounter::scoreCounter(std::string filename, int r, int g, int b):Sprite(1),
     set_clips();
 }
 
+int scoreCounter::getwidth(){};
+int scoreCounter::getheight(){};
+
 void scoreCounter::set_clips(){ //sets sprite sheet position clips
     //Clip the sprites
     states[0][1].x = 360; //0
@@ -86,7 +89,7 @@ int scoreCounter::getOffSetY()
 	return offSetY;
 }
 
-int scoreCounter::collision(){return 0;} //virtual function from inheritnace
+int scoreCounter::collision(int x,int y, int z){return 0;} //virtual function from inheritnace
 
 void scoreCounter::apply_surface(int x, int y,SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL){ //applies new surface
     //Holds offsets
@@ -125,7 +128,7 @@ void scoreCounter::setTitle(bool val)
 void scoreCounter::show(SDL_Surface *screen, bool, bool)
 
 { 
-  int xPos = SCREEN_WIDTH - (28*6);
+  int xPos = SCREEN_WIDTH - (28*6+762);
   isStarted = true;
   int digits=0;
 
@@ -152,3 +155,9 @@ void scoreCounter::show(SDL_Surface *screen, bool, bool)
 }
 
 int scoreCounter::collisioncheck(int,int,int){}
+void scoreCounter::free()
+{
+
+	  freesurface(sprite); 
+
+}

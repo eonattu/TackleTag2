@@ -18,7 +18,9 @@ class Coin: public Sprite{
   virtual int getOffSetY(); //returns y position
   virtual int collision(int,int,int); //player collision with coin
   virtual int collisioncheck(int,int,int);
-
+  virtual int getwidth();
+  virtual int getheight();
+  void free();
 protected:
   //States
   const int SPIN;

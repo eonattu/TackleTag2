@@ -17,7 +17,9 @@ class scoreCounter : public Sprite{
   virtual int getOffSetY();
   virtual int collision(int,int,int);
   virtual int collisioncheck(int,int,int);
-
+  virtual int getwidth();
+  virtual int getheight();
+  virtual void free();
   void setScore(int);
   void setTitle(bool);
   bool getTitle();

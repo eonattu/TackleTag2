@@ -41,7 +41,7 @@ int obstacle::getOffSetY(){ //returns y position
 
 
 
-void obstacle::move(int,int,int){} //virtual function from inheritance
+void obstacle::move(int x,int y,int z){} //virtual function from inheritance
 void obstacle::setStarting(bool val)
 {
   isStarting = val;
@@ -60,6 +60,12 @@ void obstacle::setOffSetY(int num)
 {
   offSetY = num;
 }
+int obstacle::getwidth(){ //returns width position
+	return 50;
+}
+int obstacle::getheight(){ //returns height position
+	return 70;
+}
 
 void obstacle::setOffSetX(int num)
 {
@@ -77,6 +83,12 @@ void obstacle::show(SDL_Surface *screen,bool tackle,bool fall)
 {
 
 	  apply_surface(sprite, screen, &states[0][0] ); 
+
+}
+void obstacle::free()
+{
+
+	 freesurface(sprite); 
 
 }
 int obstacle::collisioncheck(int,int,int){}

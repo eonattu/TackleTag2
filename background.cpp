@@ -33,4 +33,8 @@ Background::Background(const char *image, SDL_Surface *screen){
   // SDL_BlitSurface(picture,NULL,screen,NULL); //copy picture to the screen
   //SDL_Flip(screen); //update the screen
 }
+void Background::free()
+{
+	SDL_FreeSurface(picture);
+}
 

@@ -35,6 +35,8 @@ int MenuScreen::getOffSetX(){ //returns x position
 int MenuScreen::getOffSetY(){ //returns y position
 	return offSetY;
 }
+int MenuScreen::getwidth(){return 1;}
+int MenuScreen::getheight(){return 1;}
 
 bool MenuScreen::getHasPlayed(){return hasPlayed;} 
 
@@ -67,7 +69,7 @@ bool MenuScreen::handle_event(SDL_Event &event)
 	return false;
 }
 
-int MenuScreen::collision(){} //virtual function from inheritance
+int MenuScreen::collision(int x, int y, int z){} //virtual function from inheritance
 
 int MenuScreen::collisioncheck(int,int,int){}
 
@@ -86,4 +88,10 @@ void MenuScreen::show(SDL_Surface *screen, bool, bool)
 	  }
 
 	apply_surface(sprite, screen, &states[0][frame]);
+}
+void MenuScreen::free()
+{
+
+	  freesurface(sprite); 
+
 }

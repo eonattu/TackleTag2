@@ -10,6 +10,7 @@ class Background
  public: 
   Background(const char *, SDL_Surface *); //takes name of background image
   void show(SDL_Surface *);
+  void free();
  private:
   
   SDL_Surface *picture;

@@ -30,6 +30,9 @@ class player : public Sprite {
   void setDead(bool); 
   void setStatus(int);
   void setFrame(int);
+  virtual int getwidth();
+  virtual int getheight();
+  virtual void free();
 
 protected:
   bool isVisible; //otter shown on screen
