@@ -236,7 +236,7 @@ if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
 			//cout << "here1asdfasdfasdfasdfasdfasdfasdfasdfasdf\n" << endl;
 		}	
 		
-		if( score >=7 score <=28) {
+		if (score >=7 && score <=28) {
 			
 					int randX= rand()%(SCREEN_WIDTH-300) + 300;
 					if (randX ==SCREEN_WIDTH/2) randX== (SCREEN_WIDTH/2-100);

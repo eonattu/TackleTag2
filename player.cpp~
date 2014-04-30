@@ -531,7 +531,7 @@ void player::move(int obstaclex,int obstacley, int type)
   
   else if (type==3)
   {
-	  	if (offSetX < obstaclex || offSetX > obstaclex-50) 
+	  	if (offSetX < obstaclex || offSetX > obstaclex-30) 
 	  	{
 	  	offSetX -=velocityX;
 		velocityY = 40;

@@ -68,7 +68,7 @@ void obstacle::setOffSetX(int num)
 
 int obstacle::collision(int x,int y,int player){ //if a collision has happened with a coin
 
-  hasCollided = false; //set collided to true
+  hasCollided = false; //set collided to false
   return 1; //collision was with a coin
 
 }
