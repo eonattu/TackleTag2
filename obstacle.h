@@ -11,12 +11,12 @@
 class obstacle : public Sprite {
  public:
   obstacle(std::string,int,int,int,int,int);
-  virtual void move();
+  virtual void move(int,int,int);
   virtual void show(SDL_Surface *,bool,bool); // Shows obstacle
   virtual void set_clips(); //sets sprite sheet position clips
   virtual int getOffSetX(); //returns x position coordinate
   virtual int getOffSetY(); //returns y position coordinate 
-  virtual int collision(); //handles collision
+  virtual int collision(int,int,int); //handles collision
   virtual int collisioncheck(int,int,int);
   void setOffSetY(int); 
   void setOffSetX(int);

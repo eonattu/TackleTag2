@@ -41,7 +41,7 @@ int obstacle::getOffSetY(){ //returns y position
 
 
 
-void obstacle::move(){} //virtual function from inheritance
+void obstacle::move(int,int,int){} //virtual function from inheritance
 void obstacle::setStarting(bool val)
 {
   isStarting = val;
@@ -66,15 +66,17 @@ void obstacle::setOffSetX(int num)
   offSetX=num;
 }
 
-int obstacle::collision(){return 0;} //virtual function from inheritance
+int obstacle::collision(int x,int y,int player){ //if a collision has happened with a coin
 
+  hasCollided = false; //set collided to false
+  return 1; //collision was with a coin
+
+}
 
 void obstacle::show(SDL_Surface *screen,bool tackle,bool fall)
 {
-	if (isVisible)
-	  {	
+
 	  apply_surface(sprite, screen, &states[0][0] ); 
-	  }
 
 }
 int obstacle::collisioncheck(int,int,int){}

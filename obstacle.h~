@@ -16,7 +16,8 @@ class obstacle : public Sprite {
   virtual void set_clips(); //sets sprite sheet position clips
   virtual int getOffSetX(); //returns x position coordinate
   virtual int getOffSetY(); //returns y position coordinate 
-  virtual int collision(); //handles collision
+  virtual int collision(int,int,int); //handles collision
+  virtual int collisioncheck(int,int,int);
   void setOffSetY(int); 
   void setOffSetX(int);
     void setStarting(bool); 

@@ -86,7 +86,7 @@ int scoreCounter::getOffSetY()
 	return offSetY;
 }
 
-int scoreCounter::collision(int x,int y, int z){return 0;} //virtual function from inheritnace
+int scoreCounter::collision(){return 0;} //virtual function from inheritnace
 
 void scoreCounter::apply_surface(int x, int y,SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL){ //applies new surface
     //Holds offsets
