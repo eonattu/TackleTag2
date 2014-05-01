@@ -1,10 +1,10 @@
-
 INSTALLATION:
 	MUST HAVE SDL LIBRARIES INSTALLED
 		-In order to run TackleTag all SDL libraries must be installed
 	RUN MAKE FILE
 		- In order to compile the program simply run the makefile by using the `make` 
 	          command in the project repository.
+	        - Then enter './main' to run the program
 		
 ENVIRONMENTS:
 	TackleTag was built in the Linux Red Hat Environment, it should in theory be able to run on any machine which has the SDL libraries installed, but all environments have not be tested. Performance on other platforms cannot be guaranteed.
@@ -12,8 +12,10 @@ ENVIRONMENTS:
 INSTRUCTIONS:
 	-Run main
 	-Stop title screen music by pressing 's'
-	-Press ‘space’ to begin. Avoid the USC Player by moving using the arrow keys and rack up points.
-	-Collect coins for extra points. Coins count for 100 points each.
+	-Press ‘space’ to begin. Avoid the USC Player by moving using the arrow keys and rack up points by collecting coins.
+	-Coins count for 10 points each.
+	-Game begins with 100 points. No one is a loser in this game.
+	-Game ends when the USC player runs 'tackles' the ND player.
 	-Hit ‘space’ to play again
 	-'X' out on the window to close the game
 		
