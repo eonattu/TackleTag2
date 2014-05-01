@@ -252,7 +252,7 @@ vector<Sprite*> obstacles; // This will hold coins and cones. Can easily be expa
 			if (score==0) score =100;
 				for (int j=3; j<=14;j++)
 				{		
-				 obstacle* cone = new obstacle("cone.bmp",255,255,255, rand()%(SCREEN_WIDTH-200)+200, j*40);//create cone in heap
+				 obstacle* cone = new obstacle("cone.bmp",255,255,255, rand()%(SCREEN_WIDTH-400)+200, j*40);//create cone in heap
 
 			   obstacles.push_back(cone); // place it in vector
 				}
