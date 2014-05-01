@@ -16,7 +16,6 @@ Timer::Timer()
 
 void Timer::start()
 {
-  //Start counting
   started = true;
   paused = false;
   
@@ -26,7 +25,6 @@ void Timer::start()
 
 void Timer::stop()
 {
-  //Stops counting
   started = false;
   paused = false;
 }
@@ -44,7 +42,8 @@ void Timer::pause()
 }
 
 void Timer::unpause()
-{ 
+{
+  
   if( paused == true )
     {
       paused = false; // unpause
@@ -59,11 +58,11 @@ int Timer::get_ticks()
     {
       if( paused == true )
         {
-	 		return pausedTicks; // Just return pausedTicks
+	  return pausedTicks; // Just return pausedTicks
         }
       else
         {
-	  		return SDL_GetTicks() - startTicks; //Get difference
+	  return SDL_GetTicks() - startTicks; //Get difference
         }
     }
   

@@ -3,7 +3,8 @@
 
 class Timer
 {
- public:
+   
+    public:
 
     Timer();
 
@@ -22,6 +23,7 @@ class Timer
 
 
  private:
+    
     int startTicks;
     int pausedTicks;
   

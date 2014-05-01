@@ -1,3 +1,6 @@
+//Authors: Alejandra Aranguren, Adrian Gerbaud, Edwin Onattu
+// This is the implementation of the player class. 
+
 #include "sprite.h"
 #include "player.h"
 #include "SDL/SDL.h"
@@ -7,15 +10,15 @@
 #include <cstdlib>
 #include<iostream>
 
-player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(8), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3), TDown(4), TUp(5), TRight(6), TLeft(7)
+player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(8), SPRITE_DOWN(0), SPRITE_UP(1), SPRITE_RIGHT(2), SPRITE_LEFT(3), TDown(4), TUp(5), TRight(6), TLeft(7) //Constructor
 {
     //Initialize sprite dimensions
     height = 120;
     width = 100;
 
     //Initialize movement variables
-    offSetY = x;
-    offSetX = y;
+    offSetY = Y;
+    offSetX = X;
     velocityX = 0;
     velocityY = 0;
 	
@@ -32,20 +35,13 @@ player::player(std::string filename, int r, int g, int b, int x, int y):Sprite(8
     set_clips();
     
     isVisible = true;
-    isDead = false;
+
 }
 
-void player::setDead(bool dead)
-{
-	if(dead) isDead = true;
-	else isDead = false;
-}
 
-void player::set_clips(){ //sets sprite sheet clip positions
+void player::set_clips()
+{ //sets sprite sheet clip positions
 
-
-
-    
   //Clip the sprites
   
   //down
@@ -163,7 +159,7 @@ void player::set_clips(){ //sets sprite sheet clip positions
 
     states[3][3].x = 360;
     states[3][3].y = 360;
-    states[3][3].w = width;
+    states[3][3].w = width+10;
     states[3][3].h = height;
 
     states[3][4].x = 480; 
@@ -176,9 +172,9 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[3][5].w = width;
     states[3][5].h = height;
 
-    // We can make the height more precise
 
-    //TRight
+
+    //Tackle Right
 
     states[6][0].x = 0; 
     states[6][0].y = 480;
@@ -211,7 +207,7 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[6][5].w = 145;
     states[6][5].h = height;
 
-    // TLeft
+    // Tackle Left
 
     states[7][0].x = 172; 
     states[7][0].y = 720;
@@ -245,69 +241,69 @@ void player::set_clips(){ //sets sprite sheet clip positions
     states[7][5].h = height;
 
     
-    // TUp
+    // Tackle Up
 
     states[5][0].x = 0; 
     states[5][0].y = 960;
     states[5][0].w = width;
-    states[5][0].h = 2*height;
+    states[5][0].h = height;
 
     states[5][1].x = 120;
     states[5][1].y = 960;
     states[5][1].w = width;
-    states[5][1].h = 2*height;
+    states[5][1].h = height;
 
     states[5][2].x = 240; 
     states[5][2].y = 960;
     states[5][2].w = width;
-    states[5][2].h = 2*height;
+    states[5][2].h = height;
 
     states[5][3].x = 360;
     states[5][3].y = 960;
     states[5][3].w = width;
-    states[5][3].h = 2*height;
+    states[5][3].h = height;
 
     states[5][4].x = 480; 
     states[5][4].y = 960;
     states[5][4].w = width;
-    states[5][4].h = 2*height;
+    states[5][4].h = height;
 
     states[5][5].x = 600; 
     states[5][5].y = 960;
     states[5][5].w = width;
-    states[5][5].h = 2*height;
+    states[5][5].h = height;
 
-    // TDown
+    // Tackle Down
 
     states[4][0].x = 0; 
-    states[4][0].y = 1200;
+    states[4][0].y = 1080;
     states[4][0].w = width;
-    states[4][0].h = 2*height;
+    states[4][0].h = height;
 
     states[4][1].x = 120;
-    states[4][1].y = 1200;
+    states[4][1].y = 1080;
     states[4][1].w = width;
-    states[4][1].h = 2*height;
+    states[4][1].h = height;
 
     states[4][2].x = 240; 
-    states[4][2].y = 1200;
+    states[4][2].y = 1080;
     states[4][2].w = width;
-    states[4][2].h = 2*height;
+    states[4][2].h = height;
 
     states[4][3].x = 360;
-    states[4][3].y = 1200;
+    states[4][3].y = 1080;
     states[4][3].w = width;
-    states[4][3].h = 2*height;
+    states[4][3].h = height;
 
     states[4][4].x = 480; 
-    states[4][4].y = 1200;
+    states[4][4].y = 1080;
     states[4][4].w = width;
-    states[4][4].h = 2*height;
+    states[4][4].h = height;
 
     states[4][5].x = 600; 
-    states[4][5].y = 1200;
+    states[4][5].y = 1080;
     states[4][5].w = width;
-    states[4][5].h = 2*height;
+    states[4][5].h = height;
   
 }
 
@@ -337,13 +333,19 @@ void player::setStarting(bool val)
   isStarting = val;
 }
 
-int player::collision(int x,int y, int z){return 0;} 
+int player::collision(int x,int y, int z)
+{
+return 0;
+} //Not used. Pure virtual
 
-void player::setIsVisible(bool vis){isVisible = vis;} 
+void player::setIsVisible(bool vis)
+{
+isVisible = vis;
+} 
 
 
 int player::collisioncheck(int computerX, int computerY, int sensitivity)
-{
+{// returns 1 if something gets close enough to the player
     double xdiff = (double)computerX - ((double)offSetX+width/2);
     double ydiff =  (double)computerY - ((double)offSetY+height/2);
     double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
@@ -352,21 +354,22 @@ int player::collisioncheck(int computerX, int computerY, int sensitivity)
     else return 0;
 
 }
-int player::getwidth(){ //returns width position
+int player::getwidth()
+{ //returns width position
 	return width;
 }
-int player::getheight(){ //returns height position
+
+int player::getheight()
+{ //returns height position
 	return height;
 }
+
 void player::handle_AI(int userx, int usery)
-{
+{// controls the automatic movement of the USC Player
 double xdiff = (double)offSetX - (double)userx;
 double ydiff = (double)offSetY - (double)usery;
-//xdiff = sqrt(pow(xdiff,2));
-//ydiff = sqrt (pow(ydiff,2));
 
 double distance = sqrt(pow(xdiff,2) + pow(ydiff,2));
-
 double velocity = counter;
 if (velocity>15)
 {
@@ -386,8 +389,9 @@ int direction = 4;
 //cout << "userx,usery: " << userx << "," << usery<< "compX,compY:"<< offSetX<<","<< offSetY<<endl;
  if ((counter % 20) ==1) 
    {	
-     direction = (rand() % 8 +1); // does random move
+     direction = (rand() % 8 +1); // does random move sometimes, instead of picking the move that will move it closest
    }
+   
  else
    {
      if ((distright <=distance) && (distright<=distleft) && (distright <=distdown) && (distright <=distup) && (distright <=dist2oclock) && (distright <=dist5oclock) && (distright <=dist8oclock) && (distright <=dist11oclock))
@@ -422,8 +426,7 @@ int direction = 4;
        {
 	 direction = 8;
 	}
-   //cout << "\ndirection is" << direction << " dist: "<<distance << " xdiff,ydiff:"<<xdiff<<","<<ydiff ; 
-   }
+  }
  
  switch(direction)
    {
@@ -469,61 +472,57 @@ void player::handle_events(SDL_Event &event)
         //Adjust the velocity
       switch( event.key.keysym.sym )
         {
-	case SDLK_UP: velocityY -= velocity; break;
-	case SDLK_DOWN: velocityY += velocity; break;
-	case SDLK_LEFT: velocityX -= velocity; break;
-	case SDLK_RIGHT:velocityX  += velocity; break;
+			case SDLK_UP: velocityY -= velocity; break;
+			case SDLK_DOWN: velocityY += velocity; break;
+			case SDLK_LEFT: velocityX -= velocity; break;
+			case SDLK_RIGHT:velocityX  += velocity; break;
         }
     }
   
-  //If a key was released, spot
+  //If a key was released
   else if( event.type == SDL_KEYUP )
     {
       //Adjust the velocity
       switch( event.key.keysym.sym )
-	{
-	case SDLK_UP: velocityY += velocity; break;
-	case SDLK_DOWN: velocityY -= velocity; break;
-	case SDLK_LEFT: velocityX += velocity; break;
-	case SDLK_RIGHT: velocityX -= velocity; break;
-	}
+			{
+			case SDLK_UP: velocityY += velocity; break;
+			case SDLK_DOWN: velocityY -= velocity; break;
+			case SDLK_LEFT: velocityX += velocity; break;
+			case SDLK_RIGHT: velocityX -= velocity; break;
+			}
     }
   
 }
 
 void player::handle_AIadjust()
-{
+{// reset velocities
 	velocityX=0;
 	velocityY=0;
 }
 
 void player::move(int obstaclex,int obstacley, int type)
 {
-	
-
-    // cout << "\noffsetx,y pre : "<< offSetX<<","<<offSetY;
-    // Check boundary conditions
-  if (type==0)
+  if (type==0) // Regular Move function to make sure within bounds
   {
     offSetX += velocityX;
   
 
-  offSetY += velocityY;
-  if( (offSetX < 0) || ( offSetX + width > SCREEN_WIDTH-200 ) )
+ 	 offSetY += velocityY;
+ 	 // Checks Horizontal boundaries
+  if( (offSetX < 0) || ( offSetX + width > SCREEN_WIDTH ) )
     {
       offSetX -= velocityX;
     }  
   
-  // Check boundary conditions
-  if( ( offSetY < 0 ) || ( offSetY + height > SCREEN_HEIGHT+40 ) )
+  // Check vertical boundary conditions
+  if( ( offSetY < 0 ) || ( offSetY + height > SCREEN_HEIGHT ) )
     {
       offSetY -= velocityY;
     }
   }
-  else if (type==1)
+  else if (type==1)  // User vs. Cone movement adjust (treat like wall)
   {
-   //cout << "\noffsetx,y post : "<< offSetX<<","<<offSetY;
-   //cout << "\nobstaclex,obstacley: "<< obstaclex<<","<<obstacley;
+
   	if (offSetX < obstaclex || offSetX > obstaclex) 
   	{
   	offSetX -=velocityX;
@@ -534,44 +533,15 @@ void player::move(int obstaclex,int obstacley, int type)
   	}
   }
   
-  else if (type==3)
+  else if (type==3) // AI vs. Cone. AI attempts to move around obstacle
   {
-  /*
-	  	if ((offSetX+width) >= obstaclex || (offSetX) <= (obstaclex+50)) 
-	  	{
-	  	//cout << "apples";
-	  	offSetX -=velocityX;
-	  	if ((counter % 20) ==1) 
-   	{	
-     velocityY =-10; // does random move
-   	}
-		//velocityY =-10;
-		offSetY +=15;
-	  	}
-	  	//if((offSetX) >=(obstaclex-50) && offSetX <=(obstaclex)) offSetX -=velocityX;
-		if ((offSetY+height) > obstacley || (offSetY) <= (obstacley+70))
-		{
-		//cout << "gorrillas";
-		 offSetY -=velocityY;
-		 	if ((counter % 20) ==1) 
-				{	
-			  velocityX =-10; // does random move
-				}
-		 		offSetX +=15;
-
-	  	}
-	  	//else if((offSetY) >=(obstacley-70) && offSetY <=(obstacley)) offSetX -=velocityY;
-  	*/
-  	
-  	//cout << "\noffsetx,y post : "<< offSetX<<","<<offSetY;
-   //cout << "\nobstaclex,obstacley: "<< obstaclex<<","<<obstacley;
+  
   	if (offSetX < obstaclex || offSetX > obstaclex) 
   	{
   	offSetX -=velocityX;
   	velocityX = 0;
   	offSetY += 5;
-  	  	//velocityX = 20;
-  	velocityY = +10;
+	velocityY = +10;
   	}
    if (offSetY >obstacley || offSetY < obstacley)
    {
@@ -580,127 +550,123 @@ void player::move(int obstaclex,int obstacley, int type)
     offSetY -=velocityY;
     velocityY=0;
     velocityX = +10; 
-    //velocityY = 20;
   	}
   }
-    //cout << "\nmove X,y:"<< offSetX <<","<<offSetY<<endl;
+
 }
 
 
-void player::show(SDL_Surface *screen, bool tackle, bool fall) // if i dont  want it to be able to tackle, forced a false
+void player::show(SDL_Surface *screen, bool tackle, bool fall) // if dont  want it to be able to tackle, forced a false
 {
 
   if(isVisible)
     {
       if(velocityY > 0)
-	{
-	  if (tackle) status = TDown;
-	    
-	  
-	  
-	  else status = SPRITE_DOWN;
-	  
-	  frame++;
-	}
+			{
+			  if (tackle) status = TDown;
+			  else status = SPRITE_DOWN;
+			  
+			  frame++;
+			}
       
       else if(velocityY < 0 )
-	{
-	  
-	  if (tackle) status = TUp; 
-	  else status = SPRITE_UP;
-	  frame++;
-	}
+			{
+			  
+			  if (tackle) status = TUp; 
+			  else status = SPRITE_UP;
+			  frame++;
+			}
   
       else if(velocityX > 0)
-	{
-	  if (tackle) status = TRight;
-	   
-	  else status = SPRITE_RIGHT;
-	  frame++;
-	}
-  
+			{
+			  if (tackle) status = TRight;
+			
+			  else status = SPRITE_RIGHT;
+			  frame++;
+			}
+		  
       else if(velocityX < 0)
-	{
-        
+			{
+				  
 
-	  if (tackle) status = TLeft;
-	  else status = SPRITE_LEFT;
-	  frame++;
-	}
-      
+			  if (tackle) status = TLeft;
+			  else status = SPRITE_LEFT;
+			  frame++;
+			}
+				
       // Reset if more thn 5
 
       if(frame>5)
-	{ 
-	  frame=0;
-	}
+			{ 
+			  frame=0;
+			}
 
 
 
-      // Apply the surface
+      // Apply the surface based on state
       
       if( status == SPRITE_DOWN )
-	{
+			{
 
-	  apply_surface(sprite, screen, &states[0][frame] ); 
-	}
-      
+			  apply_surface(sprite, screen, &states[0][frame] ); 
+			}
+				
       else if( status == SPRITE_UP )
-	{ 
-	  apply_surface(sprite, screen, &states[1][frame] ); 
-	}
+			{ 
+			  apply_surface(sprite, screen, &states[1][frame] ); 
+			}
       
       else if( status == SPRITE_RIGHT )
-	{
-	  apply_surface(sprite, screen, &states[2][frame] );
-	}
-      
+			{
+			  apply_surface(sprite, screen, &states[2][frame] );
+			}
+				
       else if( status == SPRITE_LEFT)
-	{ 
-	  apply_surface(sprite, screen, &states[3][frame] );
-	}
+			{ 
+			  apply_surface(sprite, screen, &states[3][frame] );
+			}
 
       else if ( status == TDown)
-	{
-	  apply_surface(sprite,screen, &states[4][frame]);
-	}
+			{
+			  apply_surface(sprite,screen, &states[4][frame]);
+			}
       else if( status == TUp)
-	{ 
-	  apply_surface(sprite, screen, &states[5][frame] );
-	}
+			{ 
+			  apply_surface(sprite, screen, &states[5][frame] );
+			}
       
       else if( status == TRight)
-	{ 
-	  apply_surface(sprite, screen, &states[6][frame] );
-	}
+			{ 
+			  apply_surface(sprite, screen, &states[6][frame] );
+			}
 
       else if( status == TLeft)
-	{ 
-	  apply_surface(sprite, screen, &states[7][frame] );
-	}
-     
+			{ 
+			  apply_surface(sprite, screen, &states[7][frame] );
+			}
+			  
       
     }
 } 
 
 
 int player::getStatus()
-{
+{//returns number that represents current state
   return status;
 }
 
 void player:: setStatus(int num)
-{
+{//sets to a particular status
   status = num;
 }
 
 void player:: setFrame(int num)
-{
+{//sets frame
   frame = num;
 }
 
 void player::free()
-{
+{//Frees sprite surface
 
 	  freesurface(sprite); 
 

@@ -13,24 +13,30 @@ class Sprite
 {
  public:
   Sprite(int); //constructor
-  void apply_surface(SDL_Surface *,SDL_Surface *,SDL_Rect *); //applies new surface
+ 
   virtual void move(int,int,int)=0; // handles the movement of the sprite
   virtual void show(SDL_Surface *, bool, bool)=0; // updates the frames of the sprite sheet shown based on conditional logic
   virtual void set_clips()=0; //clips sprite sheet
   virtual int collision(int,int,int)=0; //handles collision with another object
-  SDL_Surface * load_image(std::string,int,int,int); //takes in image of sprite
-  virtual int getOffSetX()=0; //returns x position coordinate
-  virtual int getOffSetY()=0; //returns y position coordinate
-  virtual int collisioncheck(int,int,int)=0;
+  virtual int getOffSetX()=0; //returns x pos
+  virtual int getOffSetY()=0; //returns y pos
+  virtual int collisioncheck(int,int,int)=0;// returns 1 if what is specified gets too close
   virtual int getwidth()=0;
   virtual int getheight()=0;
-  void freesurface(SDL_Surface*);
-  int frame; // determines which frame of the sprite sheet should be displayed
-  bool getHasCollided(); //returns whether object has collided with another
+  virtual void free() =0;
+  
+   void apply_surface(SDL_Surface *,SDL_Surface *,SDL_Rect *); //applies new surface
+   
+  SDL_Surface * load_image(std::string,int,int,int); //takes in image of sprite
+   bool getHasCollided(); //returns whether object has collided with another
+   
+  void freesurface(SDL_Surface*); //Frees surface
+ 
   SDL_Surface * sprite; //sprite surface
   
  protected:
-
+ 	int frame; // determines which frame of the sprite sheet should be displayed
+ 
   int offSetX; // position of the sprite relevant to the origin of the x
   int offSetY; //and y axes
   int velocityX; // horizontal speed the sprite is moving at

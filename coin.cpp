@@ -1,3 +1,6 @@
+//Authors: Adrian Gerbaud, Jandra Aranguren, Edwin Onattu
+//This is the implementation of the coin class.
+
 #include<cmath>
 #include "sprite.h"
 #include "coin.h"
@@ -6,8 +9,8 @@
 #include <string>
 #include <iostream>
 
-Coin::Coin(std::string filename, int r, int g, int b,int randX,int randY):Sprite(2), SPIN(0), SCORE(1){
-
+Coin::Coin(std::string filename, int r, int g, int b,int randX,int randY):Sprite(2), SPIN(0), SCORE(1)
+{
     hasCollided = false;
   
     //Initialize movement variables
@@ -27,20 +30,25 @@ Coin::Coin(std::string filename, int r, int g, int b,int randX,int randY):Sprite
     set_clips();
 }
 
-int Coin::getOffSetX(){ //returns x position
+int Coin::getOffSetX()
+{ //returns x position
 	return offSetX;
 }
 
-int Coin::getOffSetY(){ //returns y position
+int Coin::getOffSetY()
+{ //returns y position
 	return offSetY;
 }
-int Coin::getwidth(){ //returns width position
+int Coin::getwidth()
+{ //returns width position
 	return 15;
 }
-int Coin::getheight(){ //returns height position
+int Coin::getheight()
+{ //returns height position
 	return 16;
 }
-void Coin::set_clips(){ //sets clip location for sprite sheets
+void Coin::set_clips()
+{ //sets clip location for sprite sheets
     //Clip the sprites
     states[0][0].x = 6; //spin0
     states[0][0].y = 3;
@@ -97,35 +105,44 @@ void Coin::set_clips(){ //sets clip location for sprite sheets
     states[1][0].w = 14;
     states[1][0].h = 8;
 
-    states[1][1].x = 0; //points1
-    states[1][1].y = 0;
-    states[1][1].w = 0;
-    states[1][1].h = 0;
 
 }
 
-int Coin::collision(int x,int y,int player){ //if a collision has happened with a coin
-	if (player ==1)
-  	{
-  status = SCORE; //switch to show score sprites instead of coin
-  hasCollided = true; //set collided to true
-  return 2; //collision was with a coin
+int Coin::collision(int x,int y,int player){
+//if a collision has happened with a coin and a player
+
+  if (player ==1) //User player collision
+  {
+	  status = SCORE; //switch to show score sprites instead of coin
+	  hasCollided = true; //set collided to true
+	  return 2; //collision was with a coin and Player
 	}
 }
 
 
-void Coin::move(int x,int y, int z){}
+void Coin::move(int x,int y, int z)
+{
+ // Not used. Must be included as it is a pure virtual function.
+}
 
 
-void Coin::show(SDL_Surface *screen,bool,bool){ //rotates between sprite images to show animation
-	if (status == SCORE){
+void Coin::show(SDL_Surface *screen,bool,bool)
+{ //rotates between sprite images to show animation
+	if (status == SCORE)
+	{
 		frame=0;
 		apply_surface(sprite, screen, &states[1][frame]); //display score sprite
 	}
-	if (status == SPIN){ //if still in coin
-		if (frame < 9){
+	if (status == SPIN)
+	{ //if still in coin
+		if (frame < 9)
+		{
 			frame++; //swap between sprites
-		}else{
+		}
+		
+		else
+		
+		{
         	frame = 0; //return to first sprite when reach last
 		}
 		apply_surface(sprite, screen, &states[0][frame]); //display sprite
@@ -143,8 +160,6 @@ int Coin::collisioncheck(int computerX, int computerY, int sensitivity)
 
 }
 void Coin::free()
-{
-
+{//Frees coin sprite
 	  freesurface(sprite); 
-
 }

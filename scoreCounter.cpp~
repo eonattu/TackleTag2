@@ -1,3 +1,6 @@
+//Authors: Adrian Gerbaud, Jandra Aranguren, Edwin Onattu
+//Implementation of the scoreCounter class
+
 #include "sprite.h"
 #include "scoreCounter.h"
 #include "SDL/SDL.h"
@@ -6,7 +9,8 @@
 #include <math.h>
 
 
-scoreCounter::scoreCounter(std::string filename, int r, int g, int b):Sprite(1), COUNT(0){ //constructor
+scoreCounter::scoreCounter(std::string filename, int r, int g, int b):Sprite(1), COUNT(0)
+{ //constructor
  
     isStarted = false;
     score = 0;
@@ -23,14 +27,16 @@ scoreCounter::scoreCounter(std::string filename, int r, int g, int b):Sprite(1),
     set_clips();
 }
 
-int scoreCounter::getwidth(){};
-int scoreCounter::getheight(){};
+int scoreCounter::getwidth(){}; //Initialized for pure virtual function.
+int scoreCounter::getheight(){}; //Initialized for pure virtual function.
 
-void scoreCounter::set_clips(){ //sets sprite sheet position clips
+void scoreCounter::set_clips()
+{ 
+	 //sets sprite sheet position clips
     //Clip the sprites
     states[0][1].x = 360; //0
     states[0][1].y = 1530;
-    states[0][1].w = 24;
+    states[0][1].w = 10;
     states[0][1].h = 30;
 
     states[0][2].x = 384; //1
@@ -91,7 +97,9 @@ int scoreCounter::getOffSetY()
 
 int scoreCounter::collision(int x,int y, int z){return 0;} //virtual function from inheritnace
 
-void scoreCounter::apply_surface(int x, int y,SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL){ //applies new surface
+void scoreCounter::apply_surface(int x, int y,SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL)
+{ 
+	 //applies new surface
     //Holds offsets
     SDL_Rect shift;
 
@@ -106,7 +114,7 @@ void scoreCounter::apply_surface(int x, int y,SDL_Surface* source, SDL_Surface* 
 
 
 
-void scoreCounter::move(int,int,int){} 
+void scoreCounter::move(int,int,int){} //Not used. Pure Virtual.
 
 void scoreCounter::setScore(int num)
 {
@@ -128,7 +136,8 @@ void scoreCounter::setTitle(bool val)
 void scoreCounter::show(SDL_Surface *screen, bool, bool)
 
 { 
-  int xPos = SCREEN_WIDTH - (28*6+762);
+  //Shows the numbers on the top right corner of the screen
+  int xPos = SCREEN_WIDTH - (28*6);
   isStarted = true;
   int digits=0;
 
@@ -142,11 +151,11 @@ void scoreCounter::show(SDL_Surface *screen, bool, bool)
       		apply_surface(xPos,0,sprite, screen, &states[0][frame]);
 		}else{
 			digits++;
-			//xPos -= 165;
+
 			xPos -= ((480-((digits+1)*28))/2)-10;
 			apply_surface(xPos,135,sprite, screen, &states[0][frame]);	
 			xPos += ((480-((digits+1)*28))/2)-10;
-			//xPos += 165;
+
 		}
       isStarted = true;
     }
@@ -154,10 +163,9 @@ void scoreCounter::show(SDL_Surface *screen, bool, bool)
   }
 }
 
-int scoreCounter::collisioncheck(int,int,int){}
+int scoreCounter::collisioncheck(int,int,int){} //Not included. Pure Virtual function.
 void scoreCounter::free()
-{
-
+{//Frees Sprite Surface
 	  freesurface(sprite); 
 
 }

@@ -1,3 +1,6 @@
+//Author: Adrian Gerbaud, Edwin Onattu, Alejandra Aranguren
+// This is the implementation of the menuScreen class
+
 #include "sprite.h"
 #include "menuScreen.h"
 #include "SDL/SDL.h"
@@ -6,8 +9,8 @@
 #include <iostream>
 
 
-MenuScreen::MenuScreen(std::string filename, int r, int g, int b):Sprite(2),TITLE(0),REPLAY(1){ //constructor
-
+MenuScreen::MenuScreen(std::string filename, int r, int g, int b):Sprite(2),TITLE(0),REPLAY(1)
+{ //constructor
     hasCollided = false;
     hasPlayed = false;
 
@@ -28,22 +31,36 @@ MenuScreen::MenuScreen(std::string filename, int r, int g, int b):Sprite(2),TITL
     set_clips();
 }
 
-int MenuScreen::getOffSetX(){ //returns x position
+int MenuScreen::getOffSetX()
+{ //returns x position
 	return offSetX;
 }
 
-int MenuScreen::getOffSetY(){ //returns y position
+int MenuScreen::getOffSetY()
+{ //returns y position
 	return offSetY;
 }
-int MenuScreen::getwidth(){return 1;}
-int MenuScreen::getheight(){return 1;}
+int MenuScreen::getwidth()
+{return 1;
+} // Have to include because pure virtual
 
-bool MenuScreen::getHasPlayed(){return hasPlayed;} 
+int MenuScreen::getheight(){
+return 1;
+} // Have to include because pure virtual
 
-void MenuScreen::setHasPlayed(bool p){hasPlayed = p;}
+bool MenuScreen::getHasPlayed()
+{
+return hasPlayed;
+} 
+
+void MenuScreen::setHasPlayed(bool p)
+{
+hasPlayed = p;
+}
 
 void MenuScreen::set_clips()
-{ //sets clip positions for menu sprite
+{ //Sets up frames
+
     //Clip the sprites
     states[0][0].x = 0; //title
     states[0][0].y = 0;
@@ -60,8 +77,10 @@ void MenuScreen::set_clips()
 bool MenuScreen::handle_event(SDL_Event &event)
 { //watches for spacebar press to start game
 	    // if the space bar is currently pressed
-	    if(event.type == SDL_KEYDOWN){
-	        switch(event.key.keysym.sym){
+	    if(event.type == SDL_KEYDOWN)
+	    {
+	        switch(event.key.keysym.sym)
+	        {
 	            case SDLK_SPACE: return true;
 	            break; // break once the spacebar has been pressed
 	        }
@@ -71,7 +90,7 @@ bool MenuScreen::handle_event(SDL_Event &event)
 
 int MenuScreen::collision(int x, int y, int z){} //virtual function from inheritance
 
-int MenuScreen::collisioncheck(int,int,int){}
+int MenuScreen::collisioncheck(int,int,int){} // virtual function from inheritance. Not used
 
 void MenuScreen::move(int,int,int){} //virtual function from inheritance
 
@@ -89,8 +108,9 @@ void MenuScreen::show(SDL_Surface *screen, bool, bool)
 
 	apply_surface(sprite, screen, &states[0][frame]);
 }
+
 void MenuScreen::free()
-{
+{//Frees sprite surface
 
 	  freesurface(sprite); 
 

@@ -4,7 +4,6 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-
 #include "SDL/SDL.h"
 #include <string>
 #include <iostream>
@@ -18,9 +17,11 @@ const int FRAMES_PER_SECOND = 12;
 SDL_Event event;
 SDL_Surface *screen = NULL;
 
-bool init(){
+bool init()
+{
     //Initialize all SDL subsystems
-    if(SDL_Init(SDL_INIT_EVERYTHING) == -1){
+    if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
+    {
         return false;
     }
 
@@ -38,56 +39,5 @@ bool init(){
     //If everything initialized fine
     return true;
 }
-
-bool check_collision( SDL_Rect A, SDL_Rect B ){
-    //The sides of the rectangles
-    int leftA, leftB;
-    int rightA, rightB;
-    int topA, topB;
-    int bottomA, bottomB;
-
-    //Calculate the sides of rect A
-    leftA = A.x;
-    rightA = A.x + A.w;
-    topA = A.y;
-    bottomA = A.y + A.h;
-
-    //Calculate the sides of rect B
-    leftB = B.x;
-    rightB = B.x + B.w;
-    topB = B.y;
-    bottomB = B.y + B.h;
-
-    //If any of the sides from A are outside of B
-    if( bottomA <= topB ){
-        return false;
-    }
-
-    if( topA >= bottomB ){
-        return false;
-    }
-
-    if( rightA <= leftB ){
-        return false;
-    }
-
-    if( leftA >= rightB ){
-        return false;
-    }
-
-    //If none of the sides from A are outside B
-    return true;
-}
-
-/*void clean_up(){
-    //Free the surface
-    SDL_FreeSurface(sprite);
-    SDL_FreeSurface(screen);
-    SDL_FreeSurface(obstacle);
-
-    //Quit SDL
-    SDL_Quit();
-    }*/
-
 
 #endif

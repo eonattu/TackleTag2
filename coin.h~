@@ -1,4 +1,5 @@
-
+// Authors: Jandra Aranguren, Edwin Onattu, Adrian Gerbaud
+// This is the header file for our coin class. It is a derived class from Sprite
 #include "SDL/SDL.h"
 #include "sprite.h"
 #include <vector>
@@ -11,7 +12,7 @@ class Coin: public Sprite{
 
  public:
   Coin(std::string,int,int,int,int,int); //constructor
-  virtual void move(int,int,int); //moves coin across screen
+  virtual void move(int,int,int); //Not used, but inherited.
   virtual void show(SDL_Surface *,bool,bool); //displays proper sprite to screen
   virtual void set_clips(); //sets sprite sheet clip positions
   virtual int getOffSetX(); //returns x position
@@ -20,7 +21,7 @@ class Coin: public Sprite{
   virtual int collisioncheck(int,int,int);
   virtual int getwidth();
   virtual int getheight();
-  void free();
+  virtual void free();
 protected:
   //States
   const int SPIN;
