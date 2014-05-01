@@ -224,6 +224,7 @@ vector<Sprite*> obstacles; // This will hold coins and cones. Can easily be expa
 		  		{ 
 		  				return 1; 
 		  		} 
+		
 	  }
 	  
 	playerUSC.counter++; //AI counter used for velocity. It doesn't wait for anybody
@@ -245,12 +246,13 @@ vector<Sprite*> obstacles; // This will hold coins and cones. Can easily be expa
 	  
 	  // -------------Cone Spawning---------------
 	  
-	  if (score==1 ) 
+	  if (score==0) 
+		
 	  	{//Spawns when score==1 to signify start of new game
-			
+			if (score==0) score =100;
 				for (int j=3; j<=14;j++)
 				{		
-				 obstacle* cone = new obstacle("cone.bmp",255,255,255, rand()%(SCREEN_WIDTH-400)+200, j*40);//create cone in heap
+				 obstacle* cone = new obstacle("cone.bmp",255,255,255, rand()%(SCREEN_WIDTH-200)+200, j*40);//create cone in heap
 
 			   obstacles.push_back(cone); // place it in vector
 				}
@@ -261,8 +263,8 @@ vector<Sprite*> obstacles; // This will hold coins and cones. Can easily be expa
 	  	int spawnCoin = rand()%1000 + 1;
 		if(spawnCoin < 150) // spawn coins (150/1000 of the time)
 			{
-				int randX= rand()%950 + 100;
-				int randY= rand()%700 + 100;
+				int randX= rand()%900 + 100;
+				int randY= rand()%640 + 100;
 
 				Coin* money = new Coin("coins.bmp", 48,120,128, randX, randY);  //create coin in heap
 				obstacles.push_back(money);// place it in vector
@@ -292,13 +294,14 @@ vector<Sprite*> obstacles; // This will hold coins and cones. Can easily be expa
 			
 			if(collide == 1 || collideUSC ==1) // Close enough to collide
 			{
-				// scoreupND tries to differentiate betweeen type of collision ie. with a coin or with a cone. Return 2 for coin, and 1 for cone collision
-				int scoreupND=obstacles.at(i)->collision(playerND.getOffSetX(),playerND.getOffSetY(),1);
+				// scoreupND tries to differentiate betweeen type of collision ie. with a coin or with a cone. Return 2 for coin, and 1 for cone collision		
+				int scoreupND=0;
+				if (collide) scoreupND=obstacles.at(i)->collision(playerND.getOffSetX(),playerND.getOffSetY(),1);
 				int scoreupUSC=obstacles.at(i)->collision(playerUSC.getOffSetX(),playerUSC.getOffSetY(),2);
 				
 				if (scoreupND ==2) // User Player hit coin 
 				{
-					score = score + 100; //Adds 100 to score
+					score = score + 10; //Adds 100 to score
 					Mix_PlayChannel(7,coin,0); //Plays coin clink sound
 					collide = 0;
 				
@@ -316,7 +319,7 @@ vector<Sprite*> obstacles; // This will hold coins and cones. Can easily be expa
 		}
 
 	    
-	score += 1; // Rate of score increasing and setting.
+	score += 0; // Rate of score increasing and setting.
 	scoreCount.setScore(score);
 
 	// Call show Functions
